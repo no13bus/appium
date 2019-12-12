@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>用户反馈</title>
+</head>
+<body>
+<div class="layui-upload">
+   <div>
+      <input type="file" name="files[]"  id="picture" multiple="multiple"/>
+   </div>
+   <div id="previewImg">
+   </div>
+
+   <a id="upImg" class="layui-btn" style="margin-top: 20px;">上传图片</a>
+</div>
+
+<script>
+function upImg(){
+    formData.append('state', 0);
+    formData.append('type', 0);
+    $.ajax({
+        url: "/phone/",
+        type: 'POST',
+        cache: false,
+        data: formData,
+        dataType:"json",
+        timeout: 5000,
+        //必须false才会避开jQuery对 formdata 的默认处理
+        // XMLHttpRequest会对 formdata 进行正确的处理
+        processData: false,
+        //必须false才会自动加上正确的Content-Type
+        contentType: false,
+        xhrFields: {
+            withCredentials: true
+        },
+        success:function(data) {
+            //console.log(data.code);
+                if(data.code=="000000"){
+                    var data=data.data;
+                    //console.log(data.data);
+                    sessionStorage.setItem("comm_img",data);
+                    console.log(sessionStorage.getItem("comm_img"));
+                    alert("图片上传成功");
+                }else{
+                    alert("图片上传失败");
+                }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+        }
+    })
+}
+</script>
+</body>
+</html>

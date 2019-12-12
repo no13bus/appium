@@ -1,0 +1,75 @@
+<div class="col-md-1 navbar-fixed-bottom">
+    <div class="row">
+        <div class="col-md-8 con">
+            <br>
+            <a href="/phone">
+                {% if nav == "phone" %}
+                    <button class="li_o"><img src="/static/img/index.png"></button>
+                {% else %}
+                    <button class="but_tm"><img src="/static/img/index.png"></button>
+                {% endif %}
+            </a>
+            <br>
+            <br>
+            <a href="/server">
+                {% if nav == "server" %}
+                    <button class="li_o"><img src="/static/img/server.png"></button>
+                {% else %}
+                    <button class="but_tm"><img src="/static/img/server.png"></button>
+                {% endif %}
+            </a>
+            <br>
+            <br>
+            {% if request.user.is_superuser %}
+                <a href="/superuser">
+                    {% if nav == "superuser" %}
+                        <button class="li_o"><img src="/static/img/setting.png"></button>
+                    {% else %}
+                        <button class="but_tm"><img src="/static/img/setting.png"></button>
+                    {% endif %}
+                </a>
+                <br>
+                <br>
+                <a href="/openvpn">
+                    {% if nav == "openvpn" %}
+                        <button class="li_o"><img src="/static/img/agency_server.png" style="width:32px;height:28px;">
+                        </button>
+                    {% else %}
+                        <button class="but_tm"><img src="/static/img/agency_server.png" style="width:32px;height:28px;">
+                        </button>
+                    {% endif %}
+                </a>
+                <br>
+                <br>
+                <a href="/zaloid">
+                    {% if nav == "zaloid" %}
+                        <button class="li_o"><img src="/static/img/zalo_index.png"></button>
+                    {% else %}
+                        <button class="but_tm"><img src="/static/img/zalo_index.png"></button>
+                    {% endif %}
+                </a>
+                <br>
+                <br>
+                <a href="/records">
+                    {% if nav == "records" %}
+                        <button class="li_o"><img src="/static/img/records.png"></button>
+                    {% else %}
+                        <button class="but_tm"><img src="/static/img/records.png"></button>
+                    {% endif %}
+                </a>
+                <br>
+                <br>
+            {% endif %}
+{#            <a href="">#}
+{#                {% if nav == "help" %}#}
+{#                    <button class="li_o"><img src="/static/img/help.png" style="width:32px;height:28px;"></button>#}
+{#                {% else %}#}
+{#                    <button class="but_tm"><img src="/static/img/help.png" style="width:32px;height:28px;"></button>#}
+{#                {% endif %}#}
+{#            </a>#}
+{#            <div class="dibu">#}
+{#                <button class="but_tmt">中文<img src="/static/img/language.png"></button>#}
+{#            </div>#}
+        </div>
+    </div>
+</div>

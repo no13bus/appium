@@ -1,0 +1,20 @@
+{% for i in openvpn_all %}
+    <tr class="gradeA odd" role="row">
+        <td class="center">{{ i.id }}</td>
+        <td class="center">{{ i.file_name }}</td>
+        <td class="center">{{ i.ip_port }}</td>
+        <td class="center">{{ i.vpn_status }}</td>
+        <td class="center">{{ i.device_max }}</td>
+        <td class="center">{{ i.phone_all }}</td>
+        <td class="center">
+            <button onclick="edit_vpn({{ i.id }})" type="button" class="btn btn-xs btn-success btn-edit" data-toggle="modal">
+                edit
+            </button>
+            <button class="btn btn-xs btn-danger btn-edit" onclick="delete_vpn(this)" id="{{ i.id }}">
+                delete
+            </button>
+        </td>
+    </tr>
+
+
+{% endfor %}

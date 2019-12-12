@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ZALO群控</title>
+    {% block css %}
+        <!-- Bootstrap -->
+        <script type="text/javascript"
+                src="https://api.map.baidu.com/api?v=2.0&ak=FAN4uHP7YE1gz75nrmTHM9QWqhVpBdz2&language=VN"></script>
+        <link href="/static/bootstrap/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/static/css/page.css">
+        <!-- end -->
+        {#    <link rel="shortcut icon" href="/static/img/lgo.png" type="image/x-icon"/>#}
+        <style>
+            .con {
+                background: #4165EB;
+                height: 100vh;
+            }
+
+            .con1 {
+                background: #3e8f3e;
+                width: 100vh;
+            }
+
+            .li_o {
+                background: #274DDA;
+                width: 50px;
+                border: none;
+            }
+
+            .dibu {
+                position: fixed;
+                bottom: 0;
+            }
+
+            .but_tm {
+                background: transparent;
+                width: 50px;
+                border: none;
+            }
+
+            .but_tmt {
+                background: transparent;
+                width: 50px;
+                border: none;
+            }
+
+            .user_but {
+                background: transparent;
+                width: 50px;
+                border: none;
+
+            }
+
+            .right_page {
+                padding-left: 0px;
+            }
+
+            .modal-body {
+                height: 185px;
+            }
+
+            .col-lg-3 {
+                padding-top: 7px
+            }
+
+            .div-cursor {
+                cursor: pointer;
+                background: rgb(247, 249, 255);
+            }
+
+            .on_server_div {
+                cursor: pointer;
+                background: rgb(65, 101, 235);
+            }
+
+            .phone_icon {
+                padding-right: 25px;
+                padding-left: 25px;
+                display: block
+            }
+
+            .phone_wabei {
+                height: 300px;
+            }
+
+
+            #box {
+                width: 300px;
+                height: 300px;
+                border: 2px solid #858585;
+            }
+
+            #imgshow {
+                width: 70px;
+                height: 24px;
+                overflow: hidden;
+            }
+
+            .li_class {
+                display: inline;
+                line-height: 24px;
+                height: auto;
+                word-break: break-all;
+                word-wrap: break-word;
+            }
+
+            ul {
+                list-style: none;
+            }
+        </style>
+    {% endblock %}
+</head>
+<body style="background-color:rgb(247, 249, 255);">
+<div class="container-fluid">
+    <div class="row">
+        {% include "BaseTemplate/left_nav.html" %}
+        <div class="col-md-1"></div>
+        {% block table %}
+
+        {% endblock %}
+    </div>
+</div>
+
+{% block js %}
+    <script src="/static/jquery-3.1.1.min.js"></script>
+    <script src="/static/bootstrap/bootstrap.min.js"></script>
+    <script>
+
+
+        // 添加虚拟机
+        function add_avd(obj) {
+            $('#myModal').modal('show');   //手动打开方式
+        }
+
+        // 添加服务器
+        function add_server(obj) {
+            $('#servermodel').modal('show');   //手动打开方式
+        }
+
+        // 手机号添加
+        function ADD_PHONE(obj) {
+            $("#span0").text($("input[name='phone_list']:checked").length);
+            $('#add_phone_number').modal('show');
+        }
+
+        // 发送朋友圈
+        function send_friends(obj) {
+            open_map("send_friends");
+            $('#send_friends').modal('show');   //手动打开方式
+            $("#span1").text($("input[name='phone_list']:checked").length);
+        }
+
+        // 群发好友模态框
+        function send_msg_all_friend_model(obj) {
+            $('#send_msg_all_friend').modal('show');   //手动打开方式
+            $("#span2").text($("input[name='phone_list']:checked").length);
+        }
+
+        // 添加附近人模态框
+        function Add_people_nearby_model(obj) {
+            open_map("add_people");
+            $('#Add_people_nearby').modal('show');   //手动打开方式
+            $("#span3").text($("input[name='phone_list']:checked").length);
+        }
+
+
+        // gps定位
+        function gps_location(obj) {
+            $('#location').modal('show');   //手动打开方式
+            $("#span4").text($("input[name='phone_list']:checked").length);
+        }
+
+        // 聊天室
+        function room_class() {
+            // 打开模态框
+            $('#room').modal('show');   //手动打开方式
+            $("#span5").text($("input[name='phone_list']:checked").length);
+
+        }
+
+        // 添加代理IP
+        function Add_Proxy_modal(obj) {
+            $('#Add_Proxy').modal('show');   //手动打开方式
+        }
+
+         // 进入聊天室发消息
+        function group_chat(obj) {
+            $('#group_chat_modal').modal('show');   //手动打开方式
+            $("#span6").text($("input[name='phone_list']:checked").length);
+        }
+
+
+        // 添加zalo账号
+        function Add_zalo(obj) {
+            $('#Add_zaloid').modal('show');   //手动打开方式
+        }
+
+        // websocket
+        function Web_Socket(obj) {
+            $('#websocket').modal('show');
+        }
+
+
+
+
+    </script>
+
+    <script type="text/javascript">
+        // 百度地图API功能
+        function open_map(info) {
+            var name = info + "_allmap";
+            var longitude = "#" + info + "_longitude";
+            var latitude = "#" + info + "_latitude";
+            var map = new BMap.Map(name);
+            map.centerAndZoom("胡志明", 12);
+            map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+            map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+            //单击获取点击的经纬度
+            map.addEventListener("click", function (e) {
+                $(longitude).text(e.point.lng);
+                $(latitude).text(e.point.lat);
+            });
+
+        }
+
+    </script>
+
+    <script src="/static/setupAjax.js"></script>
+    <script>
+
+        // 创建虚拟机，
+        function create_phone(hits) {
+            var server_url = "/server/" + hits.value + "/";
+            var mobile_count = $("#mobile_count").val();
+            var targetid = $("#targetid").val();
+            var zaloapk_id = $("#zaloapk_id").val();
+            $.ajax(
+                {
+                    url: server_url,
+                    type: "post",
+                    data: {
+                        mobile_count: mobile_count,
+                        targetid: targetid,
+                        zaloapk_id: zaloapk_id,
+                    },
+                    success: function (data) {
+                        alert(data.code + " :" + data.msg)
+                    }
+                }
+            )
+        }
+
+
+        // 启动虚拟机
+        function start_avd(hits) {
+            var str = "";
+            $("input[name='phone_list']:checked").each(function (index, item) {
+                if ($("input[name='phone_list']:checked").length - 1 == index) {
+                    str += $(this).val();
+                } else {
+                    str += $(this).val() + ",";
+                }
+            });
+            console.log(str);
+            console.log(hits.value);
+            var server_url = "/server/" + hits.value + "/";
+            $.ajax(
+                {
+                    url: server_url,
+                    type: "put",
+                    data: {
+                        phone_list: str,
+                        status: 0
+                    },
+                    success: function (data) {
+                        alert(data.code + " :" + data.msg)
+                    }
+                }
+            )
+        }
+
+        // 关闭虚拟机
+        function close_avd(hits) {
+            var str = "";
+            $("input[name='phone_list']:checked").each(function (index, item) {
+                if ($("input[name='phone_list']:checked").length - 1 == index) {
+                    str += $(this).val();
+                } else {
+                    str += $(this).val() + ",";
+                }
+            });
+            var server_url = "/server/" + hits.value + "/";
+            $.ajax(
+                {
+                    url: server_url,
+                    type: "put",
+                    data: {
+                        phone_list: str,
+                        status: 1
+                    },
+                    success: function (data) {
+                        alert(data.code + " :" + data.msg)
+                    }
+                }
+            )
+        }
+
+        // 删除虚拟机
+        function delete_avd(hits) {
+            var str = "";
+            $("input[name='phone_list']:checked").each(function (index, item) {
+                if ($("input[name='phone_list']:checked").length - 1 == index) {
+                    str += $(this).val();
+                } else {
+                    str += $(this).val() + ",";
+                }
+            });
+            var server_url = "/server/" + hits.value + "/";
+            res = confirm("删除是不可恢复的，你确认要删除吗？");
+            if (res) {
+                $.ajax(
+                    {
+                        url: server_url,
+                        type: "delete",
+                        data: {
+                            phone_list: str,
+                        },
+                        success: function (data) {
+                            alert(data.code + " :" + data.msg);
+                            window.location.href = base_url + server_url;
+                        }
+                    }
+                )
+            }
+        }
+
+        // 删除服务器
+        function delete_server(hits) {
+            res = confirm("删除是不可恢复的，你确认要删除吗？");
+            if (res) {
+                var server_url = "/server/" + hits.value + "/";
+                $.ajax(
+                    {
+                        url: server_url,
+                        type: "put",
+                        data: {
+                            phone_list: str,
+                            status: 1
+                        },
+                        success: function (data) {
+                            alert(data.code + " :" + data.msg)
+                        }
+                    }
+                )
+            }
+        }
+
+
+        // 查看结果
+        function look_result(hits) {
+            // 获取当前url
+            var url = document.location.origin;
+            window.location.href = url + "/records";
+        }
+    </script>
+    <script>
+        // 导航栏按钮点击
+        $(".but_tm").click(function () {
+            console.log($(this).val());
+            $(".li_o").addClass("but_tm").removeClass("li_o");
+            $(this).addClass("li_o").removeClass("but_tm");
+        })
+
+    </script>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,22 @@
+{% for i in id_info_all %}
+    <tr class="gradeA odd" role="row">
+        <td class="center">{{ i.id }}</td>
+        <td class="center">{{ i.name }}</td>
+        <td class="center">{{ i.phone }}</td>
+        <td class="center">{{ i.password }}</td>
+        <td class="center">{{ i.Phone_name }}</td>
+        <td class="center">{{ i.creationtime }}</td>
+        <td class="center">{{ i.updatetime }}</td>
+        <td class="center">
+            <button onclick="show_edit_zalo_modal({{ i.id }})" type="button"
+                    id="{{ i.id }}" class="btn btn-xs btn-success btn-edit" data-toggle="modal">
+                edit
+            </button>
+            <button class="btn btn-xs btn-danger btn-edit" onclick="delete_zalo(this)" id="{{ i.id }}">
+                delete
+            </button>
+        </td>
+    </tr>
+
+
+{% endfor %}

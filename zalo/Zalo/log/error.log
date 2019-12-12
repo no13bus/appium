@@ -1,0 +1,230 @@
+[2019-12-12 10:29:47,998][MainThread:27392][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\autoreload.py:217][INFO][D:\git\zalo\Zalo\Zalo\common.py changed, reloading.]
+[2019-12-12 10:32:19,559][MainThread:24688][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\autoreload.py:217][INFO][D:\git\zalo\Zalo\Zalo\common.py changed, reloading.]
+[2019-12-12 10:32:35,819][MainThread:25444][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\autoreload.py:217][INFO][D:\git\zalo\Zalo\Zalo\common.py changed, reloading.]
+[2019-12-12 10:46:50,244][MainThread:31816][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\autoreload.py:217][INFO][D:\git\zalo\Zalo\zalo01\common.py changed, reloading.]
+[2019-12-12 10:48:16,202][MainThread:1432][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\autoreload.py:217][INFO][D:\git\zalo\Zalo\zalo01\common.py changed, reloading.]
+[2019-12-12 10:55:41,977][Thread-2:32852][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\log.py:228][WARNING][Not Found: /E:/phoneinfo.xlsx.txt]
+[2019-12-12 10:56:04,378][Thread-2:32852][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\log.py:228][WARNING][Not Found: /E:/phoneinfo.txt]
+[2019-12-12 11:04:19,096][MainThread:15864][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\autoreload.py:217][INFO][D:\git\zalo\Zalo\zalo01\common.py changed, reloading.]
+[2019-12-12 11:05:15,915][Thread-1:16392][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\log.py:228][ERROR][Internal Server Error: /phone/]
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\views.py", line 505, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\views.py", line 465, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\views.py", line 476, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\views.py", line 502, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\decorators.py", line 45, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\git\zalo\Zalo\zalo01\viewss\phone_views.py", line 67, in post
+    new_content, phone_obj_all = eval("dispose_content.{}()".format(instruct))
+  File "<string>", line 1, in <module>
+  File "D:\git\zalo\Zalo\zalo01\common.py", line 444, in Add_Phone_number_friend
+    add_phone_number_file_url = DisposeExcel(AddPhoneNumberPath)
+  File "D:\git\zalo\Zalo\zalo01\common.py", line 226, in DisposeExcel
+    for i in read_excel(filepath):
+  File "D:\git\zalo\Zalo\Zalo\common.py", line 62, in read_excel
+    wb = xlrd.open_workbook(filename=file_path)  # 打开文件
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\xlrd\__init__.py", line 157, in open_workbook
+    ragged_rows=ragged_rows,
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\xlrd\book.py", line 88, in open_workbook_xls
+    ragged_rows=ragged_rows,
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\xlrd\book.py", line 616, in biff2_8_load
+    raise XLRDError("File size is 0 bytes")
+xlrd.biffh.XLRDError: File size is 0 bytes
+[2019-12-12 11:06:02,479][Thread-1:11500][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\log.py:228][ERROR][Internal Server Error: /phone/]
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\views.py", line 505, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\views.py", line 465, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\views.py", line 476, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\views.py", line 502, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\decorators.py", line 45, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\git\zalo\Zalo\zalo01\viewss\phone_views.py", line 67, in post
+    new_content, phone_obj_all = eval("dispose_content.{}()".format(instruct))
+  File "<string>", line 1, in <module>
+  File "D:\git\zalo\Zalo\zalo01\common.py", line 445, in Add_Phone_number_friend
+    add_phone_number_file_url = DisposeExcel(AddPhoneNumberPath)
+  File "D:\git\zalo\Zalo\zalo01\common.py", line 226, in DisposeExcel
+    for i in read_excel(filepath):
+  File "D:\git\zalo\Zalo\Zalo\common.py", line 62, in read_excel
+    wb = xlrd.open_workbook(filename=file_path)  # 打开文件
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\xlrd\__init__.py", line 157, in open_workbook
+    ragged_rows=ragged_rows,
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\xlrd\book.py", line 88, in open_workbook_xls
+    ragged_rows=ragged_rows,
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\xlrd\book.py", line 616, in biff2_8_load
+    raise XLRDError("File size is 0 bytes")
+xlrd.biffh.XLRDError: File size is 0 bytes
+[2019-12-12 11:07:08,404][Thread-1:11500][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\log.py:228][ERROR][Internal Server Error: /phone/]
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\views.py", line 505, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\views.py", line 465, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\views.py", line 476, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\views.py", line 502, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\decorators.py", line 45, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\git\zalo\Zalo\zalo01\viewss\phone_views.py", line 67, in post
+    new_content, phone_obj_all = eval("dispose_content.{}()".format(instruct))
+  File "<string>", line 1, in <module>
+  File "D:\git\zalo\Zalo\zalo01\common.py", line 445, in Add_Phone_number_friend
+    add_phone_number_file_url = DisposeExcel(AddPhoneNumberPath)
+  File "D:\git\zalo\Zalo\zalo01\common.py", line 226, in DisposeExcel
+    for i in read_excel(filepath):
+  File "D:\git\zalo\Zalo\Zalo\common.py", line 62, in read_excel
+    wb = xlrd.open_workbook(filename=file_path)  # 打开文件
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\xlrd\__init__.py", line 157, in open_workbook
+    ragged_rows=ragged_rows,
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\xlrd\book.py", line 88, in open_workbook_xls
+    ragged_rows=ragged_rows,
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\xlrd\book.py", line 616, in biff2_8_load
+    raise XLRDError("File size is 0 bytes")
+xlrd.biffh.XLRDError: File size is 0 bytes
+[2019-12-12 11:15:13,866][Thread-1:31640][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\log.py:228][ERROR][Internal Server Error: /phone/]
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\views.py", line 505, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\views.py", line 465, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\views.py", line 476, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\views.py", line 502, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\decorators.py", line 45, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\git\zalo\Zalo\zalo01\viewss\phone_views.py", line 67, in post
+    new_content, phone_obj_all = eval("dispose_content.{}()".format(instruct))
+  File "<string>", line 1, in <module>
+  File "D:\git\zalo\Zalo\zalo01\common.py", line 446, in Add_Phone_number_friend
+    add_phone_number_file_url = DisposeExcel(AddPhoneNumberPath)
+  File "D:\git\zalo\Zalo\zalo01\common.py", line 226, in DisposeExcel
+    for i in read_excel(filepath):
+  File "D:\git\zalo\Zalo\Zalo\common.py", line 62, in read_excel
+    wb = xlrd.open_workbook(filename=file_path)  # 打开文件
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\xlrd\__init__.py", line 157, in open_workbook
+    ragged_rows=ragged_rows,
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\xlrd\book.py", line 88, in open_workbook_xls
+    ragged_rows=ragged_rows,
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\xlrd\book.py", line 616, in biff2_8_load
+    raise XLRDError("File size is 0 bytes")
+xlrd.biffh.XLRDError: File size is 0 bytes
+[2019-12-12 11:21:46,120][Thread-1:13232][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\log.py:228][ERROR][Internal Server Error: /phone/]
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\views.py", line 505, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\views.py", line 465, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\views.py", line 476, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\rest_framework\views.py", line 502, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\decorators.py", line 45, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\git\zalo\Zalo\zalo01\viewss\phone_views.py", line 67, in post
+    new_content, phone_obj_all = eval("dispose_content.{}()".format(instruct))
+  File "<string>", line 1, in <module>
+  File "D:\git\zalo\Zalo\zalo01\common.py", line 446, in Add_Phone_number_friend
+    add_phone_number_file_url = DisposeExcel(AddPhoneNumberPath)
+  File "D:\git\zalo\Zalo\zalo01\common.py", line 226, in DisposeExcel
+    for i in read_excel(filepath):
+  File "D:\git\zalo\Zalo\Zalo\common.py", line 62, in read_excel
+    wb = xlrd.open_workbook(filename=file_path)  # 打开文件
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\xlrd\__init__.py", line 157, in open_workbook
+    ragged_rows=ragged_rows,
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\xlrd\book.py", line 88, in open_workbook_xls
+    ragged_rows=ragged_rows,
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\xlrd\book.py", line 616, in biff2_8_load
+    raise XLRDError("File size is 0 bytes")
+xlrd.biffh.XLRDError: File size is 0 bytes
+[2019-12-12 11:27:42,684][MainThread:28808][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\autoreload.py:217][INFO][D:\git\zalo\Zalo\zalo01\common.py changed, reloading.]
+[2019-12-12 11:51:16,219][Thread-12:19080][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\log.py:228][WARNING][Not Found: /static\user_file\2a7d46088398ce833f62eb2245a498a2.txt]
+[2019-12-12 11:51:16,227][Thread-13:33292][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\log.py:228][WARNING][Not Found: /static\user_file\2a7d46088398ce833f62eb2245a498a2.txt]
+[2019-12-12 12:03:09,610][Thread-81:14060][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\log.py:228][WARNING][Not Found: /static\user_file\2a7d46088398ce833f62eb2245a498a2.txt]
+[2019-12-12 12:03:09,624][Thread-82:31812][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\log.py:228][WARNING][Not Found: /static\user_file\2a7d46088398ce833f62eb2245a498a2.txt]
+[2019-12-12 12:31:08,217][MainThread:32812][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\autoreload.py:217][INFO][D:\git\zalo\Zalo\zalo01\viewss\records_views.py changed, reloading.]
+[2019-12-12 12:31:29,009][MainThread:21864][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\autoreload.py:217][INFO][D:\git\zalo\Zalo\zalo01\viewss\records_views.py changed, reloading.]
+[2019-12-12 12:35:26,277][MainThread:27956][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\autoreload.py:217][INFO][D:\git\zalo\Zalo\zalo01\viewss\records_views.py changed, reloading.]
+[2019-12-12 12:48:24,450][MainThread:25872][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\autoreload.py:217][INFO][D:\git\zalo\Zalo\zalo01\viewss\server_views.py changed, reloading.]
+[2019-12-12 12:49:43,321][MainThread:29004][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\autoreload.py:217][INFO][D:\git\zalo\Zalo\zalo01\viewss\server_views.py changed, reloading.]
+[2019-12-12 12:52:51,406][MainThread:33772][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\autoreload.py:217][INFO][D:\git\zalo\Zalo\zalo01\viewss\phone_views.py changed, reloading.]
+[2019-12-12 12:59:36,857][MainThread:11340][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\autoreload.py:217][INFO][D:\git\zalo\Zalo\zalo01\viewss\phone_views.py changed, reloading.]
+[2019-12-12 13:01:01,117][MainThread:9608][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\autoreload.py:217][INFO][D:\git\zalo\Zalo\zalo01\viewss\phone_views.py changed, reloading.]
+[2019-12-12 13:01:24,103][MainThread:28668][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\autoreload.py:217][INFO][D:\git\zalo\Zalo\zalo01\viewss\phone_views.py changed, reloading.]
+[2019-12-12 13:01:47,090][MainThread:11220][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\autoreload.py:217][INFO][D:\git\zalo\Zalo\zalo01\viewss\phone_views.py changed, reloading.]
+[2019-12-12 13:02:00,934][MainThread:15984][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\autoreload.py:217][INFO][D:\git\zalo\Zalo\zalo01\viewss\phone_views.py changed, reloading.]
+[2019-12-12 13:44:19,463][MainThread:17340][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\autoreload.py:217][INFO][D:\git\zalo\Zalo\zalo01\viewss\Vpn_views.py changed, reloading.]
+[2019-12-12 14:10:43,191][MainThread:30820][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\autoreload.py:217][INFO][D:\git\zalo\Zalo\zalo01\viewss\user_views.py changed, reloading.]
+[2019-12-12 14:11:06,445][MainThread:33564][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\autoreload.py:217][INFO][D:\git\zalo\Zalo\zalo01\viewss\user_views.py changed, reloading.]
+[2019-12-12 14:12:05,056][MainThread:10816][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\autoreload.py:217][INFO][D:\git\zalo\Zalo\zalo01\viewss\user_views.py changed, reloading.]
+[2019-12-12 14:12:09,829][MainThread:19736][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\autoreload.py:217][INFO][D:\git\zalo\Zalo\zalo01\viewss\user_views.py changed, reloading.]
+[2019-12-12 15:08:56,168][MainThread:25940][C:\Users\Administrator\AppData\Local\Programs\Python\Python37\lib\site-packages\django\utils\autoreload.py:217][INFO][D:\git\zalo\Zalo\zalo01\common.py changed, reloading.]

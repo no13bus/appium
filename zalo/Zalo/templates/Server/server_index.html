@@ -1,0 +1,348 @@
+{% extends 'BaseTemplate/Base_tempaltes.html' %}
+{% block css %}
+    {{ block.super }}
+{% endblock %}
+{% block table %}
+    <div class="col-md-11 right_page">
+        <ul class="nav nav-pills" style="background:rgb(255, 255, 255);">
+            <li role="presentation" class="active" style=" padding-top: 18px;">
+                <img src="/static/img/blackserver.png"> Server Settings
+            </li>
+            <!--用户显示开始-->
+            {% include 'BaseTemplate/userinfo.html' %}
+            <!-- 用户显示结束-->
+        </ul>
+        <div style="background:rgb(247, 249, 255); color: rgb(247, 249, 255);">
+            pass
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="row">
+                    <!-- 左边服务器列表-->
+                    <div class="col-lg-2" style="width: 130px;">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" style="width: 127px;">
+                                {{ server_ip }}
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                {% for server in server_all %}
+                                    <li><a href="/server/{{ server.id }}">{{ server.ip }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        {% if request.user.is_superuser %}
+                            <button type="button" class="btn btn-default dropdown-toggle" onclick="add_server()">ADD
+                                Server
+                            </button>
+                        {% endif %}
+                    </div>
+                    <div class="col-lg-2">
+                        <button type="button" class="btn ">
+                            Automatic allocation failure:({{ error_len }})
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Table -->
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Device</th>
+                        <th>User Name</th>
+                        <th>ZALO ID</th>
+                        <th>OpenVpn</th>
+                        <th>运行状态</th>
+                        <th>Phone Status</th>
+                        <th>ZALO Status</th>
+                        <th>VPN Status</th>
+                        <th>operation</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% include 'Server/server_table.html' %}
+                    </tbody>
+                </table>
+            </div>
+            <div style="Float:right">
+                {% include "BaseTemplate/page.html" %}
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!-- 修改设备信息 -->
+    <div class="modal fade" id="edit_phone" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document" style="padding-right: 0px;width: 900px;height: 600px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Edit VPN</h4>
+                </div>
+                <div class="modal-body" style="height: auto">
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-4 col-lg-4">DeviceName</label>
+                        <div class="col-sm-2 col-lg-2">
+                            <input type="text" id="devicename">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-4 col-lg-4">User admin</label>
+                        <div class="col-sm-2 col-lg-2">
+                            <select id="select_user">
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-4 col-lg-4">Open VPN</label>
+                        <div class="col-sm-2 col-lg-2">
+                            <select id="select_vpn">
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-4 col-lg-4">ZALO ID</label>
+                        <div class="col-sm-2 col-lg-2">
+                            <select id="select_zalo">
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="alert alert-danger" role="alert">Vui lòng chọn các tùy chọn sau một cách cẩn thận. Nếu đã chọn thiết bị thay đổi trạng thái đột ngột, nó có thể gây ra lỗi!</div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-4 col-lg-4">Operation</label>
+                        <div class="col-sm-8 col-lg-8" id="is_operation">
+                            <input type="radio" name="is_operation" value="0">
+                            <label>Rảnh</label>
+                            <input type="radio" name="is_operation" value="1">
+                            <label>Đang chạy</label>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-4 col-lg-4">ZALO Status</label>
+                        <div class="col-sm-8 col-lg-8" id="zalo_status">
+                            <input type="radio" name="zalo_status" value="0">
+                            <label>off</label>
+                            <input type="radio" name="zalo_status" value="1">
+                            <label>on</label>
+                            <input type="radio" name="zalo_status" value="2">
+                            <label>update</label>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-4 col-lg-4">VPN Status</label>
+                        <div class="col-sm-8 col-lg-8" id="vpn_status">
+                            <input type="radio" name="vpn_status" value="0">
+                            <label>off</label>
+                            <input type="radio" name="vpn_status" value="1">
+                            <label>on</label>
+                            <input type="radio" name="vpn_status" value="2">
+                            <label>update</label>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <input type="text" id="phone_id" hidden value="">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">return</button>
+                        <input type="button" class="btn btn-primary" onclick="update_phone()" value="submit"
+                               data-dismiss="modal">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 修改设备信息end -->
+
+    <!-- 添加服务器 -->
+    <div class="modal fade" id="servermodel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document" style="padding-right: 0px;width: 900px;height: 600px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">ADD Server</h4>
+                </div>
+                <div class="modal-body" style="height: auto">
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-4 col-lg-4">IP</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <input type="text" id="server_ip" name="server_ip">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-4 col-lg-4">Series</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <input type="text" id="series" name="series">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <input type="text" id="phone_id" hidden value="">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">return</button>
+                        <input type="button" class="btn btn-primary" onclick="post_add_server()" value="submit"
+                               data-dismiss="modal">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 添加服务器end -->
+    <script>
+        // 打开添加模态框
+        var vpn_id = "";
+        var base_url = document.location.origin;
+
+        function edit_phone(id) {
+            $('#edit_phone').modal('show');
+            $('#phone_id').val(id);
+            vpn_id = id;
+            var get_url = "/phone/" + id + "/";
+            $.ajax({
+                url: get_url,
+                type: "get",
+                data: {},
+                success: function (data) {
+                    if (data.code == 200) {
+                        console.log(data.user_list);
+                        var html_null = '<option value=""></option>';
+                        document.getElementById('select_user').innerHTML = "";
+                        document.getElementById('select_vpn').innerHTML = "";
+                        document.getElementById('select_zalo').innerHTML = "";
+                        {#$("#select_user").find("option:selected").val();#}
+                        var user_html = "";
+                        for (i = 0; i < data.user_list.length; i++) {
+                            if (data.device.user_id == data.user_list[i].id) {
+                                user_html += '<option value="' + data.user_list[i].id + '" selected="selected">' + data.user_list[i].username + '</option>'
+                            } else {
+                                user_html += '<option value="' + data.user_list[i].id + '">' + data.user_list[i].username + '</option>'
+                            }
+                        }
+                        user_html += html_null;
+                        $("#select_user").prepend(user_html);
+
+                        var vpn_html = "";
+                        for (i = 0; i < data.vpn_list.length; i++) {
+                            vpn_html += '<option value="' + data.vpn_list[i].id + '">' + data.vpn_list[i].name + '</option>'
+                        }
+                        if (data.lo_vpn) {
+                            vpn_html += '<option value="' + data.lo_vpn.id + '" selected = "selected">' + data.lo_vpn.name + '</option>'
+                        }
+                        vpn_html += html_null;
+                        $("#select_vpn").prepend(vpn_html);
+
+                        var zalo_html = "";
+                        for (i = 0; i < data.zalo_list.length; i++) {
+                            zalo_html += '<option value="' + data.zalo_list[i].id + '">' + data.zalo_list[i].name + '</option>'
+                        }
+                        if (data.lo_zalo) {
+                            zalo_html += '<option value="' + data.lo_zalo.id + '" selected = "selected">' + data.lo_zalo.name + '</option>'
+                        }
+                        zalo_html += html_null;
+                        $("#select_zalo").prepend(zalo_html);
+                        $("#devicename").val(data.devicename)
+
+                    } else {
+                        alert(data.msg);
+
+                    }
+                }
+            })
+        }
+
+        // 修改设备信息
+        function update_phone() {
+            var phone_id = $('#phone_id').val();
+            var devicename = $('#devicename').val();
+            var user_id = $("#select_user option:selected").val();
+            var vpn_id = $("#select_vpn option:selected").val();
+            var zalo_id = $("#select_zalo option:selected").val();
+            var is_operation = $("input[name='is_operation']:checked").val();
+            var zalo_status = $("input[name='zalo_status']:checked").val();
+            var vpn_status = $("input[name='vpn_status']:checked").val();
+            var url = "/phone/" + phone_id + "/";
+            $.ajax({
+                url: url,
+                type: "put",
+                data: {
+                    user_id: user_id, vpn_id: vpn_id,
+                    zalo_id: zalo_id, is_operation: is_operation,
+                    zalo_status: zalo_status, vpn_status: vpn_status,
+                    devicename: devicename,
+                },
+                success: function (data) {
+                    alert(data.code + ":" + data.msg);
+                    location.reload()
+                }
+            })
+        }
+
+    </script>
+
+
+    <script type="text/javascript">
+        // 删除代理服务器
+        function delete_vpn(hits) {
+            res = confirm("Deletion is unrecoverable are you sure?");
+            if (res) {
+                var url = "/server/" + hits.id + "/";
+                $.ajax({
+                    url: url,
+                    type: "delete",
+                    success: function (data) {
+                        if (data.code) {
+                            document.getElementById(hits.id).parentNode.parentNode.remove();
+                            alert(data.msg);
+                        } else {
+                            alert(data.msg);
+                        }
+                    }
+                })
+            }
+        }
+
+        // 添加服务器
+        function post_add_server() {
+            var server_ip = $('#server_ip').val();
+            var series = $('#series').val();
+            $.ajax({
+                url: "/server/",
+                type: "post",
+                data: {
+                    server_ip: server_ip, series: series,
+                },
+                success: function (data) {
+                    if (data.code == 200) {
+                        alert(data.code + ":" + data.msg);
+                        window.location.href = base_url + "/server/";
+                    } else {
+                        alert(data.code + ":" + data.msg);
+                    }
+                }
+            })
+
+
+        }
+    </script>
+{% endblock %}

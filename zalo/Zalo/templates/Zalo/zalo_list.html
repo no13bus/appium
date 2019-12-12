@@ -1,0 +1,304 @@
+{% extends 'BaseTemplate/Base_tempaltes.html' %}
+{% block css %}
+    {{ block.super }}
+{% endblock %}
+{% block table %}
+    <div class="col-md-11 right_page">
+        <ul class="nav nav-pills" style="background:rgb(255, 255, 255);">
+            <li role="presentation" class="active" style=" padding-top: 18px;">
+                <img src="/static/img/zalo_hei.png"> ZALO ID
+            </li>
+            <!--用户显示开始-->
+            {% include 'BaseTemplate/userinfo.html' %}
+            <!-- 用户显示结束-->
+        </ul>
+        <div style="background:rgb(247, 249, 255); color: rgb(247, 249, 255);">
+            pass
+        </div>
+        <!--表格-->
+        <div class="panel panel-info">
+            <!--头-->
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-lg-1" style="width: 150px;">
+                        <button type="button" class="btn btn-default dropdown-toggle" onclick="Add_zalo()">ADD ZALO
+                            INFO
+                        </button>
+                    </div>
+                    <div class="col-lg-1">
+                        <input type="file" id="excel_file" style="display:none" onchange="uploadFile()">
+                        <button type="button" class="btn btn-default dropdown-toggle" onclick="choice_excel()">Excel
+                            File
+                        </button>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="input cell-phone number" id="zaloinfo">
+                            <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" onclick="show_zalo()">Go!</button>
+                          </span>
+                        </div><!-- /input-group -->
+                    </div>
+                </div>
+            </div>
+            <!--表格内容-->
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Zalo Name</th>
+                        <th>Phone Number</th>
+                        <th>Pass Word</th>
+                        <th>Device Name</th>
+                        <th>Creation Time</th>
+                        <th>Update Time</th>
+                        <th>operation</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% include 'Zalo/zalo_table.html' %}
+                    </tbody>
+                </table>
+            </div>
+            <div style="Float:right">
+                {% include "BaseTemplate/page.html" %}
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="Add_zaloid" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">ADD ZALO ID</h4>
+                </div>
+                <div class="modal-body" style="height: auto">
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-4 col-lg-4">Area Code</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <input type="text" id="zalo_code" name="zalo_code">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-4 col-lg-4">Name</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <input type="text" id="zalo_name" name="zalo_name">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-4 col-lg-4">PhoneNumber</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <input type="text" id="phone" name="phone">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-4 col-lg-4">PassWord</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <input type="text" id="password" name="password">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">return</button>
+                        <input type="button" class="btn btn-primary" onclick="add_zalo(this)" value="submit"
+                               data-dismiss="modal">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 修改zaloid -->
+    <div class="modal fade" id="edit_zalo_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document" style="padding-right: 0px;width: 900px;height: 600px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Edit VPN</h4>
+                </div>
+                <div class="modal-body" style="height: auto">
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-4 col-lg-4">Code</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <input type="text" id="edit_zalo_code" name="edit_zalo_code">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-4 col-lg-4">Name</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <input type="text" id="edit_zalo_name" name="edit_zalo_name">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-4 col-lg-4">Phone Number</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <input type="text" id="edit_phone" name="edit_phone">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-4 col-lg-4">PassWord</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <input type="text" id="edit_password" name="edit_password">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <input type="text" id="edit_id" name="edit_id" hidden>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">return</button>
+                        <input type="button" class="btn btn-primary" onclick="edit_zalo(this)" value="submit"
+                               data-dismiss="modal">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 修改zaloidend -->
+
+
+    <script type="text/javascript">
+        var base_url = document.location.origin;
+
+        function choice_excel() {
+            document.getElementById("excel_file").click();
+        }
+
+        // 打开修改zalo模态框
+        function show_edit_zalo_modal(id) {
+            var get_url = "/zaloid/" + id + "/";
+            $.ajax({
+                url: get_url,
+                type: "get",
+                data: {},
+                success: function (data) {
+                    if (data.code == 200) {
+                        $("#edit_id").val(data.data.id);
+                        $("#edit_zalo_code").val(data.data.code);
+                        $("#edit_zalo_name").val(data.data.name);
+                        $("#edit_phone").val(data.data.phone);
+                        $("#edit_password").val(data.data.password);
+                        $('#edit_zalo_modal').modal('show');   //手动打开方式
+                    } else {
+                        alert(data.msg)
+                    }
+                }
+            })
+        }
+
+        // 修改zaloinfo
+        function edit_zalo() {
+            var put_url = "/zaloid/" + $("#edit_id").val() + "/";
+            $.ajax({
+                url: put_url,
+                type: "put",
+                data: {
+                    code: $("#edit_zalo_code").val(),
+                    name: $("#edit_zalo_name").val(),
+                    phone: $("#edit_phone").val(),
+                    password: $("#edit_password").val()
+                },
+                success: function (data) {
+                    alert(data.code + data.msg)
+                }
+            })
+        }
+
+        // 上传文件
+        function uploadFile() {
+            var url = "/zaloid/";
+            var formData = new FormData();
+            var file = $("#excel_file")[0].files[0];
+            formData.append("excel_file", file);
+            $.ajax({
+                url: url,
+                type: "post",
+                processData: false,
+                contentType: false,
+                data: formData,
+                success: function (data) {
+                    if (data.code) {
+                        alert(data.msg);
+                        window.location.href = base_url + "/zaloid/";
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            })
+        }
+
+
+        // 删除
+        function delete_zalo(hits) {
+            res = confirm("Deletion is unrecoverable are you sure?");
+            if (res) {
+                var url = "/zaloid/" + hits.id + "/";
+                $.ajax({
+                    url: url,
+                    type: "delete",
+                    success: function (data) {
+                        if (data.code) {
+                            document.getElementById(hits.id).parentNode.parentNode.remove();
+                            alert(data.msg);
+                        } else {
+                            alert(data.msg);
+                        }
+                    }
+                })
+            }
+        }
+
+        // 添加
+        function add_zalo() {
+            var phone = $("#phone").val();
+            var zalo_code = $("#zalo_code").val();
+            var password = $("#password").val();
+            var zalo_name = $("#zalo_name").val();
+            $.ajax({
+                url: "/zaloid/",
+                type: "post",
+                data: {
+                    phone: phone, password: password,
+                    zalo_name: zalo_name, zalo_code: zalo_code,
+                },
+                success: function (data) {
+                    if (data.code == 200) {
+                        alert(data.msg);
+                        window.location.href = base_url + "/zaloid/";
+
+                    } else {
+                        alert(data.msg);
+                        $('#Add_Proxy').modal('show');   //手动打开方式
+                    }
+                }
+            })
+
+
+        }
+
+        // 查找zaloid
+        function show_zalo() {
+            window.location.href = "?phonenumber=" + $("#zaloinfo").val();
+        }
+
+    </script>
+
+{% endblock %}

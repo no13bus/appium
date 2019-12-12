@@ -1,0 +1,98 @@
+{% extends 'BaseTemplate/Base_tempaltes.html' %}
+{% block css %}
+    {{ block.super }}
+{% endblock %}
+{% block table %}
+    <div class="col-md-11 right_page">
+        <ul class="nav nav-pills" style="background:rgb(255, 255, 255);">
+            <li role="presentation" class="active" style=" padding-top: 18px;">
+                <img src="/static/img/records_black.png"> Operation Log
+            </li>
+            <!--用户显示开始-->
+            {% include 'BaseTemplate/userinfo.html' %}
+            <!-- 用户显示结束-->
+        </ul>
+        <div style="background:rgb(247, 249, 255); color: rgb(247, 249, 255);">
+            pass
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="row">
+                    <!-- 左边服务器列表-->
+                    {% if is_superuser %}
+                        <div class="col-lg-1" style="width: 110px;">
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                    User Name
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    {% for user in user_all %}
+                                        <li><a href="/records/?user_id={{ user.id }}">{{ user.username }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-1" style="width: 96px;">
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                    ZALO ID
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    {% for zalo in zalo_all %}
+                                        <li><a href="/records/?zalo_id={{ zalo.id }}">{{ zalo.phone }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="col-lg-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="输入ZALO账号" id="zaloinfo">
+                            <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" onclick="show_zalo()">Go!</button>
+                          </span>
+                        </div><!-- /input-group -->
+                    </div>
+                    <div class="col-lg-2" style="">
+                        <input type="text" class="form-control" id="item_keyword" name="item_keyword"
+                               placeholder="请输入关键字筛选" style="width: 226px;">
+                    </div>
+
+                </div>
+            </div>
+            <!-- Table -->
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>User Name</th>
+                        <th>ZALO ID</th>
+                        <th>Valid Send Msg</th>
+                        <th>Valid Add Friend</th>
+                        <th>Valid Send Gale</th>
+                        <th>Valid Accept Request</th>
+                        <th>Order</th>
+                        <th>Screenshot</th>
+                        <th>Description</th>
+                        <th>Executetime</th>
+                        <th>operation</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% include 'records/records_table.html' %}
+                    </tbody>
+                </table>
+            </div>
+            <div style="Float:right">
+                {% include "BaseTemplate/page.html" %}
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

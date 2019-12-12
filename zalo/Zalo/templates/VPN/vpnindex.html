@@ -1,0 +1,261 @@
+{% extends 'BaseTemplate/Base_tempaltes.html' %}
+{% block css %}
+    {{ block.super }}
+{% endblock %}
+{% block table %}
+    <div class="col-md-11 right_page">
+        <ul class="nav nav-pills" style="background:rgb(255, 255, 255);">
+            <li role="presentation" class="active" style=" padding-top: 18px;">
+                <img src="/static/img/proxy.png"> VPN Setting
+            </li>
+            <!--用户显示开始-->
+            {% include 'BaseTemplate/userinfo.html' %}
+            <!-- 用户显示结束-->
+        </ul>
+        <div style="background:rgb(247, 249, 255); color: rgb(247, 249, 255);">
+            pass
+        </div>
+        <!--表格-->
+        <div class="panel panel-info">
+            <!--头-->
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <button type="button" class="btn btn-default dropdown-toggle" onclick="show_add()">Zip Upload ADD</button>
+                    </div>
+                     <div class="col-lg-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="vpn name" id="vpninfo">
+                            <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" onclick="show_vpn()">Go!</button>
+                          </span>
+                        </div><!-- /input-group -->
+                    </div>
+                </div>
+            </div>
+            <!--表格内容-->
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>name</th>
+                        <th>ip:port</th>
+                        <th>status</th>
+                        <th>connect max</th>
+                        <th>Associated phone</th>
+                        <th>operation</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% include 'VPN/vpntable.html' %}
+                    </tbody>
+                </table>
+            </div>
+            <div style="Float:right">
+                {% include "BaseTemplate/page.html" %}
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="edit_vpn_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document" style="padding-right: 0px;width: 900px;height: 600px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Edit VPN</h4>
+                </div>
+                <div class="modal-body" style="height: auto">
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-4 col-lg-4">Status</label>
+                        <div class="col-sm-2 col-lg-2">
+                            <p><input type="radio" name="is_status" value="1" id="is_status" checked/>open</p>
+                        </div>
+                        <div class="col-sm-2 col-lg-2">
+                            <p><input type="radio" name="is_status" value="0" id="is_status"/>close</p>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-4 col-lg-4">connect max</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <input type="text" id="connect_max" name="connect_max">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-4 col-lg-4">devices</label>
+                        <div class="col-md-8 col-lg-8" id="device_list">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">return</button>
+                        <input type="button" class="btn btn-primary" onclick="editvpn(this)" value="submit"
+                               data-dismiss="modal">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="zip_file" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document" style="padding-right: 0px;width: 900px;height: 600px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Edit VPN</h4>
+                </div>
+                <div class="modal-body" style="height: auto">
+                    <label for="" class="control-label col-sm-4 col-lg-4">connect max</label>
+                    <div class="col-sm-8 col-lg-8">
+                        <input type="file" id="zipfile" accept="application/zip">
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-4 col-lg-4">connect max</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <input type="text" id="add_connect_max" name="add_connect_max">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">return</button>
+                        <input type="button" class="btn btn-primary" onclick="uploadZIP(this)" value="submit"
+                               data-dismiss="modal">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 打开添加模态框
+        var vpn_id = "";
+
+        // 修改vpn
+        function edit_vpn(id) {
+            $('#edit_vpn_modal').modal('show');   //手动打开方式
+            vpn_id = id;
+            var get_url = "/openvpn/" + id + "/";
+            $.ajax({
+                url: get_url,
+                type: "get",
+                data: {},
+                success: function (data) {
+                    if (data.code == 200) {
+                        document.getElementById('device_list').innerHTML = "";
+                        var input_html = '';
+                        for (i = 0; i < data.device_list.length; i++) {
+                            input_html += '<input style="margin-bottom:5px;" type="checkbox" name="devices" value="'
+                                + data.device_list[i].device_id + '" checked/>' + data.device_list[i].device_name
+                        }
+                        $("#device_list").prepend(input_html);
+                    } else {
+                        alert(data.msg);
+
+                    }
+                }
+            })
+        }
+
+        function editvpn() {
+            var devices = "";
+            $("input[name='devices']:checked").each(function (index, item) {
+                if ($("input[name='devices']:checked").length - 1 == index) {
+                    devices += $(this).val();
+                } else {
+                    devices += $(this).val() + ",";
+                }
+            });
+            var connect_max = $("#connect_max").val();
+            var is_status = $("input[name='is_status']:checked").val();
+            var url = "/openvpn/" + vpn_id + "/";
+            $.ajax({
+                url: url,
+                type: "put",
+                data: {
+                    devices: devices, vpn_id: vpn_id,
+                    is_status: is_status, connect_max: connect_max
+                },
+                success: function (data) {
+                    alert(data.code + ":" + data.msg);
+                }
+            })
+        }
+
+
+        function show_add() {
+            $('#zip_file').modal('show');   //手动打开方式
+
+        }
+
+        function uploadZIP(hits) {
+            var url = "/openvpn/";
+            var formData = new FormData();
+            var file = $("#zipfile")[0].files[0];
+            var add_connect_max = $("#add_connect_max").val();
+            var host = window.location.host;
+            formData.append("zipfile", file);
+            formData.append("device_count", add_connect_max);
+            $.ajax({
+                url: url,
+                type: "post",
+                processData: false,
+                contentType: false,
+                data: formData,
+                success: function (data) {
+                    if (data.code == 200) {
+                        alert(data.msg);
+                        window.location.href = "/openvpn/";
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            })
+        }
+
+    </script>
+
+
+
+
+
+    <script type="text/javascript">
+        // 删除VPN
+        function delete_vpn(hits) {
+            res = confirm("Deletion is unrecoverable are you sure?");
+            if (res) {
+                var url = "/openvpn/" + hits.id + "/";
+                $.ajax({
+                    url: url,
+                    type: "delete",
+                    success: function (data) {
+                        if (data.code) {
+                            document.getElementById(hits.id).parentNode.parentNode.remove();
+                            alert(data.msg);
+                        } else {
+                            alert(data.msg);
+                        }
+                    }
+                })
+            }
+        }
+
+        // 查找vpn
+    function show_vpn() {
+            window.location.href = "?vpnname=" + $("#vpninfo").val();
+        }
+
+    </script>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% for i in user_all %}
+    <tr class="gradeA odd" role="row">
+        <td class="center" >{{ i.id }}</td>
+        <td class="center">{{ i.username }}</td>
+        <td class="center">{{ i.mobile }}</td>
+        <td class="center">{{ i.last_login }}</td>
+        <td class="center">{{ i.is_active }}</td>
+        <td class="center">{{ i.date_joined }}</td>
+        <td class="center">
+            <button onclick="edit_user(this)" type="button"
+                    id="{{ i.id }}" class="btn btn-xs btn-success btn-edit" data-toggle="modal">
+                编辑
+            </button>
+            <a class="btn btn-xs btn-danger btn-edit" onclick="delete_user(this)" id="{{ i.id }}">
+                删除
+            </a>
+        </td>
+    </tr>
+    <script>
+        // 编辑用户
+        function edit_user(obj) {
+            var list = obj.parentNode.parentNode.children; // 根据当前点击标签找到tr标签
+            // tr标签可以通过索引取值获取对应的值
+            var id = list[0].innerText;
+            var url = document.location.origin;
+            window.location.href = url + "/superuser/" + id;
+        }
+    </script>
+
+{% endfor %}

@@ -1,0 +1,92 @@
+{% extends 'BaseTemplate/Base_tempaltes.html' %}
+{% block css %}
+    {{ block.super }}
+{% endblock %}
+{% block table %}
+    <div class="col-md-11 right_page">
+        <ul class="nav nav-pills" style="background:rgb(255, 255, 255);">
+            <li role="presentation" class="active" style=" padding-top: 18px;">
+                <img src="/static/img/look.png"> 操作结果查询
+            </li>
+            <!--用户显示开始-->
+            <li style="float:right">
+                <img src="/static/img/portrait.png" style="width: 70px">
+            </li>
+            <li style="float:right; padding-top: 12px;">
+                <ul>
+                    <li style="list-style: none;"><span>下午好! {{ request.user.username }}</span></li>
+                    <li style="list-style: none;float:right">
+                        <button class="user_but">退出</button>
+                        <img src="/static/img/quit.png"></li>
+                </ul>
+            </li>
+            <!-- 用户显示结束-->
+        </ul>
+        <div style="background:rgb(247, 249, 255); color: rgb(247, 249, 255);">
+            pass
+        </div>
+        <!--表格-->
+        <div class="panel panel-default">
+            <!--头-->
+            <div class="panel-heading">
+                <input type="text" class="form-control" id="item_keyword" name="item_keyword" placeholder="请输入关键字筛选"
+                       style="width: 226px;">
+            </div>
+            <!--表格内容-->
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>设备名</th>
+                        <th>操作时间</th>
+                        <th>操作类型</th>
+                        <th>状态码</th>
+                        <th>操作结果</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in data %}
+                        <tr class="gradeA odd" role="row">
+                            <td class="center">{{ forloop.counter }}</td>
+                            <td class="center">{{ i.name }}</td>
+                            <td class="center">{{ i.datatime }}</td>
+                            <td class="center">{{ i.instruct.0 }}</td>
+                            <td class="center">{{ i.code }}</td>
+                            <td class="center" title="{{ i.msg }}">{{ i.msg |truncatechars:20 }}</td>
+                            <td class="center">
+                                {% if i.code == 200 %}
+                                {% else %}
+                                    <button onclick="edit_user(this)" type="button"
+                                            id="{{ i.id }}" class="btn btn-xs btn-success btn-edit" data-toggle="modal">
+                                        重试
+                                    </button>
+                                {% endif %}
+                                <a class="btn btn-xs btn-danger btn-edit" onclick="delete_user(this)" id="{{ i.id }}">
+                                    删除
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div style="Float:right">
+                {% include "BaseTemplate/page.html" %}
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/jquery-3.1.1.min.js"></script>
+    <script>
+        /* 实时搜索框,及点击按钮全选\取消*/
+        $('#item_keyword').on('input propertychange', function () {
+            console.log($(this).val());
+            $('table tbody tr').hide()
+                .filter(":contains('" + ($(this).val()) + "')")
+                .show();
+        });
+    </script>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% for i in phone_all %}
+    <tr class="gradeA odd" role="row">
+        <td class="center">{{ i.id }}</td>
+        <td class="center">{{ i.phone_name }}</td>
+        <td class="center">{{ i.user_name }}</td>
+        <td class="center">{{ i.zalo_id }}</td>
+        <td class="center">{{ i.OpenVpn_name }}</td>
+        <td class="center">{{ i.operation }}</td>
+        <td class="center">{{ i.zalo }}</td>
+        <td class="center">{{ i.vpn }}</td>
+        <td class="center">{{ i.phone_status }}</td>
+
+        <td class="center">
+            <button onclick="edit_phone({{ i.id }})" type="button" class="btn btn-xs btn-success btn-edit"
+                    data-toggle="modal">
+                edit
+            </button>
+            <button class="btn btn-xs btn-danger btn-edit" onclick="delete_vpn(this)" id="{{ i.id }}">
+                delete
+            </button>
+        </td>
+    </tr>
+{% endfor %}

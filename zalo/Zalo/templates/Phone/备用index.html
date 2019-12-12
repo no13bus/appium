@@ -1,0 +1,1173 @@
+{% extends 'BaseTemplate/Base_tempaltes.html' %}
+{% block css %}
+    {{ block.super }}
+{% endblock %}
+{% block table %}
+    <div class="col-md-11 right_page">
+        <ul class="nav nav-pills" style="background:rgb(255, 255, 255);">
+            <li role="presentation" class="active" style=" padding-top: 18px;">
+                <div style="cursor: pointer;" onclick="start_zalo(this)">
+                    <img src="/static/img/zalo.png"
+                         style="padding-right: 20px;padding-left: 20px;display:block;width: 75px;">
+                    <span style="padding-left: 10px;">一键登录</span>
+                </div>
+            </li>
+            {#            <li role="presentation" class="active" style=" padding-top: 18px;">#}
+            {#                <div style="cursor: pointer;">#}
+            {#                    <img src="/static/img/add_phnoe.png" style="padding-right: 20px;padding-left: 20px;display:block;height: 35px;">#}
+            {#                    <span style="padding-left: 10px;">添加手机</span>#}
+            {#                </div>#}
+            {#            </li>#}
+            <li role="presentation" class="active" style=" padding-top: 18px;">
+                <div style="cursor: pointer;" onclick="ADD_PHONE();">
+                    <img src="/static/img/address.png" style="padding-right: 20px;padding-left: 20px;display:block">
+                    <span style="padding-left: 10px;">手机号添加</span>
+                </div>
+            </li>
+
+            <li role="presentation" class="active" style=" padding-top: 18px;">
+                <div style="cursor: pointer;" onclick="send_friends()">
+                    <img src="/static/img/winnower.png"
+                         style="padding-right: 20px;padding-left: 20px;display:block;height: 35px;">
+                    <span style="padding-left: 10px;">发朋友圈</span>
+                </div>
+            </li>
+
+            <li role="presentation" class="active" style=" padding-top: 18px;">
+                <div style="cursor: pointer;" onclick="send_msg_all_friend_model()">
+                    <img src="/static/img/mass_send.png"
+                         style="padding-right: 20px;padding-left: 20px;display:block;height: 35px;">
+                    <span style="padding-left: 10px;">群发消息</span>
+                </div>
+            </li>
+            {##}
+            {#            <li role="presentation" class="active" style=" padding-top: 18px;">#}
+            {#                <div style="cursor: pointer;" onclick="gps_location()">#}
+            {#                    <img src="/static/img/gps.png" style="padding-right: 20px;padding-left: 20px;display:block">#}
+            {#                    <span style="padding-left: 10px;">站街定位</span>#}
+            {#                </div>#}
+            {#            </li>#}
+
+            <li role="presentation" class="active" style=" padding-top: 18px;">
+                <div style="cursor: pointer;" onclick="Add_people_nearby_model()">
+                    <img src="/static/img/nearby.png"
+                         style="padding-right: 20px;padding-left: 20px;display:block;height: 36px;">
+                    <span style="padding-left: 10px;">添加附近人</span>
+                </div>
+            </li>
+
+            <li role="presentation" class="active" style=" padding-top: 18px;">
+                <div style="cursor: pointer;" onclick="room_class(this)">
+                    <img src="/static/img/chat_room.png"
+                         style="padding-right: 20px;padding-left: 20px;display:block;height: 36px;">
+                    <span style="padding-left: 17px;">聊天室</span>
+                </div>
+            </li>
+            <li role="presentation" class="active" style=" padding-top: 18px;">
+                <div style="cursor: pointer;" onclick="ws_progress_bar(this)">
+                    <img src="/static/img/progress_bar.png"
+                         style="padding-right: 20px;padding-left: 20px;display:block;height: 36px;">
+                    <span style="padding-left: 10px;">执行进度条</span>
+                </div>
+            </li>
+
+            <li role="presentation" class="active" style=" padding-top: 18px;">
+                <div style="cursor: pointer;" onclick="look_result(this)">
+                    <img src="/static/img/look.png"
+                         style="padding-right: 20px;padding-left: 20px;display:block;height: 36px;">
+                    <span style="padding-left: 17px;">查询结果</span>
+                </div>
+            </li>
+
+
+            <li role="presentation" class="active" style=" padding-top: 18px;">
+                <div style="cursor: pointer;">
+                    <img src="/static/img/stop.png" style="padding-right: 20px;padding-left: 20px;display:block">
+                    <span style="padding-left: 24px;">停止</span>
+                </div>
+            </li>
+            <!--用户显示开始-->
+            {% include 'BaseTemplate/userinfo.html' %}
+            <!-- 用户显示结束-->
+        </ul>
+        <div style="background:rgb(247, 249, 255); color: rgb(247, 249, 255);">
+            pass
+        </div>
+        {#        <div class="panel panel-default" style="background:rgb(247, 249, 255);">#}
+        {#            <div class="panel-heading"><input type="text"></div>#}
+        {#        </div>#}
+        <div class="row">
+            <!-- 左边主屏-->
+            <div class="col-md-3">
+                <img style="height: 563px;" src="/static/img/pindex.png">
+                <br>
+                <br>
+                <br>
+                <!-- 底部按钮-->
+                {#                <div class="container" style="margin-right: 0px;width: 340px;">#}
+                {#                    <ul class="nav nav-pills">#}
+                {#                        <li role="presentation" class="active" style=" padding-top: 18px;">#}
+                {#                            <div style="cursor: pointer;">#}
+                {#                                <img src="/static/img/stop.png"#}
+                {#                                     style="padding-right: 18px;padding-left: 18px;display:block;width: 60px;">#}
+                {#                                <span style="padding-left: 16px;">关机</span>#}
+                {#                            </div>#}
+                {#                        </li>#}
+                {##}
+                {#                        <li role="presentation" class="active" style=" padding-top: 18px;">#}
+                {#                            <div style="cursor: pointer;">#}
+                {#                                <img src="/static/img/power_off.png"#}
+                {#                                     style="padding-right: 18px;padding-left: 18px;display:block;width: 60px;height: 24px;">#}
+                {#                                <span style="padding-left: 16px;">开机</span>#}
+                {#                            </div>#}
+                {#                        </li>#}
+                {##}
+                {#                        <li role="presentation" class="active" style=" padding-top: 18px;">#}
+                {#                            <div style="cursor: pointer;">#}
+                {#                                <img src="/static/img/restart.png"#}
+                {#                                     style="padding-right: 18px;padding-left: 18px;display:block;width: 62px;">#}
+                {#                                <span style="padding-left: 16px;">重启</span>#}
+                {#                            </div>#}
+                {#                        </li>#}
+                {##}
+                {##}
+                {#                    </ul>#}
+                {#                </div>#}
+                <!-- 底部按钮end-->
+            </div>
+            <!-- 左边主屏end -->
+            <!-- 右侧小屏-->
+            <div class="col-md-9">
+                <div class="panel panel-body">
+                    <div>
+                        <input type="hidden" id="all">
+                        <input type="button" value="全选" class="btn" onclick="check_all()" name="all">
+                        <input type="button" value="全不选" class="btn" onclick="check_no_all()" id="unSelect">
+                        {#                        <input type="button" value="反选" class="btn" id="reverse">#}
+                        {#                        <input type="button" value="获得选中的所有值" class="btn" id="getValue">#}
+                    </div>
+                    <div class="panel-body">
+                        <div id="urlist1" class="row">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="fydiv">
+                <ul id="fenye" class="fenye">
+
+                </ul>
+            </div>
+            <!-- 右侧小屏end-->
+        </div>
+
+    </div>
+
+    <!-- 根据电话号码加好友模态框 -->
+    <div class="modal fade" id="add_phone_number" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document" style="padding-right: 0px;width: 1200px;height: 700px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">手机号添加</h4>
+                </div>
+                <div class="modal-body" style="height: auto">
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-3 col-lg-3">手机号码(txt文件)</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <input type="file" id="add_phone_number_file" name="add_phone_number_file" accept="text/*">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-3 col-lg-3">打招呼消息文件(txt)</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <input type="file" id="add_phone_number_call" name="add_phone_number_call" accept="text/*">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="modal-footer">
+                        <span style="float: left;">已选设备数( <span id="span0"></span> )</span>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <input type="button" class="btn btn-primary" onclick="add_phone_number_ajax(this)" value="提交"
+                               data-dismiss="modal">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 根据电话号码加好友模态框end -->
+
+    <!-- 发送朋友圈模态框 -->
+    <div class="modal fade" id="send_friends" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document" style="padding-right: 0px;width: 1200px;height: 700px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">发送朋友圈</h4>
+                </div>
+                <div class="modal-body" style="height: auto">
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-3 col-lg-3">消息内容(txt文件)</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <input type="file" id="send_friends_content" name="send_friends_content" accept="text/*">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-3 col-lg-3">图片(不选择代表不发送)</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <input type="file" accept="image/*" multiple="multiple" id="send_friends_photo">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="modal-body" id="send_friends_allmap"
+                         style="height: 530px;overflow: hidden;margin:0;font-family:'微软雅黑';">
+                    </div>
+                    <div class="modal-footer">
+                        <div style="Float:left">
+                            <span>当前选择：</span>
+                            (<span id="send_friends_longitude"></span>,
+                            <span id="send_friends_latitude"></span>)
+                        </div>
+                        <span style="float: left;">已选设备数( <span id="span1"></span> )</span>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <input type="button" class="btn btn-primary" onclick="send_Circle(this)" value="提交"
+                               data-dismiss="modal">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 发送朋友圈模态框end -->
+
+    <!-- 群发好友模态框 -->
+    <div class="modal fade" id="send_msg_all_friend" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document" style="padding-right: 0px;width: 1200px;height: 700px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">群发已加好友</h4>
+                </div>
+                <div class="modal-body" style="height: auto">
+                    <br>
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-4 col-lg-4">每个好友发送间隔(秒)</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <input type="text" id="time_out" name="time_out">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-4 col-lg-4">消息文件(txt)</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <input type="file" id="Group_send_content" name="Group_send_content" accept="text/*">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-4 col-lg-4">图片(不选择代表不发送)</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <input type="file" accept="image/*" multiple="multiple" id="Group_send_photo">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="modal-footer">
+                        <span style="float: left;">已选设备数( <span id="span2"></span> )</span>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <input type="button" class="btn btn-primary" onclick="send_Allfriend(this)" value="提交"
+                               data-dismiss="modal">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 群发好友模态框end -->
+
+    <!-- 添加附近人模态框 -->
+    <div class="modal fade" id="Add_people_nearby" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog kuang" role="document" style="padding-right: 0px;width: 1200px;height: 700px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">添加附近人</h4>
+                </div>
+                <div class="modal-body" style="height: auto">
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-2 col-lg-2">发送消息个数(最大20)</label>
+                        <div class="col-sm-4 col-lg-4">
+                            <input type="text" id="send_count" name="sen_count">
+                        </div>
+                        <label for="" class="control-label col-sm-2 col-lg-2">添加好友总数(最大30)</label>
+                        <div class="col-sm-4 col-lg-4">
+                            <input type="text" id="add_count" name="add_count">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-2 col-lg-2">选择性别</label>
+                        <div class="col-sm-4 col-lg-4">
+                            <input type="radio" id="sex" name="sex" value="female" checked>Female
+                            <input type="radio" id="sex" name="sex" value="male">Male
+                            <input type="radio" id="sex" name="sex" value="all">All
+                        </div>
+                        <label for="" class="control-label col-sm-2 col-lg-2">发送间隔(秒)</label>
+                        <div class="col-sm-4 col-lg-4">
+                            <input type="text" id="add_sleep" name="add_sleep">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-2 col-lg-2">消息文件(txt)</label>
+                        <div class="col-sm-4 col-lg-4">
+                            <input type="file" id="add_nearby_txt" name="call_text_content" accept="text/*">
+                        </div>
+                        <label for="" class="control-label col-sm-2 col-lg-2">图片(不选择代表不发送)</label>
+                        <div class="col-sm-4 col-lg-4">
+                            <input type="file" accept="image/*" multiple="multiple" id="add_nearby_photo">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="modal-body" id="add_people_allmap"
+                         style="height: 530px;overflow: hidden;margin:0;font-family:'微软雅黑';">
+                    </div>
+                    <div class="modal-footer">
+                        <div style="Float:left">
+                            <span>当前选择：</span>
+                            (<span id="add_people_longitude"></span>,
+                            <span id="add_people_latitude"></span>)
+                        </div>
+                        <span style="float: left;">已选设备数( <span id="span3"></span> )</span>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <input type="button" class="btn btn-primary" onclick="add_people_nearby(this)" value="提交"
+                               data-dismiss="modal">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 添加附近人模态框end -->
+
+    <!-- 地图定位模态框 -->
+    <div class="modal fade" id="location" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document" style="padding-right: 0px;width: 1200px;height: 700px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">定位</h4>
+                </div>
+                <div class="modal-body" id="allmap" style="height: 530px;overflow: hidden;margin:0;font-family:'微软雅黑';">
+                </div>
+                <div class="modal-footer">
+                    <div style="Float:left">
+                        <span>当前选择：</span>
+                        (<span id="longitude"></span>,
+                        <span id="latitude"></span>)
+                    </div>
+                    <span style="float: left;">已选设备数( <span id="span4"></span> )</span>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <input type="button" class="btn btn-primary" onclick="change_gps(this)" value="提交"
+                           data-dismiss="modal">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 地图定位模态框end -->
+
+    <!-- 聊天室模态框 -->
+    <div class="modal fade" id="room" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document" style="padding-right: 0px;width: 1200px;height: 700px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Chat Room</h4>
+                </div>
+                <div class="modal-body" style="height: auto">
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-4 col-lg-4">Choose Room Class</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <select id="room_class" onchange="update_class_room_name()">
+                                <option value='Địa phương'>Địa phương</option>
+                                <option value='Giáo dục & Trường học'>Giáo dục & Trường học</option>
+                                <option value='Tình yêu & Tình bạn'>Tình yêu & Tình bạn</option>
+                                <option value='Cộng đồng người Việt ở nước ngoài'>Cộng đồng người Việt ở nước ngoài
+                                </option>
+                                <option value='Phong cách sống'>Phong cách sống</option>
+                                <option value='Sân chơi - Sự Kiện'>Sân chơi - Sự Kiện</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-4 col-lg-4">Choose Room</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <select id="room_name_select">
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-4 col-lg-4">消息内容(txt文件)</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <input type="file" id="room_text_content" name="room_text_content" accept="text/*">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-4 col-lg-4">图片(不选择代表不发送)</label>
+                        <div class="col-sm-8 col-lg-8">
+                            <input type="file" accept="image/*" multiple="multiple" id="room_friends_photo">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-2 col-lg-2">发送消息个数(最大20)</label>
+                        <div class="col-sm-4 col-lg-4">
+                            <input type="text" id="room_send_count" name="room_send_count">
+                        </div>
+                        <label for="" class="control-label col-sm-2 col-lg-2">添加好友总数(最大30)</label>
+                        <div class="col-sm-4 col-lg-4">
+                            <input type="text" id="room_add_count" name="room_add_count">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="" class="control-label col-sm-2 col-lg-2">发送间隔(秒)</label>
+                        <div class="col-sm-4 col-lg-4">
+                            <input type="text" id="room_sleep" name="room_sleep">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="modal-footer">
+                        <span style="float: left;">已选设备数( <span id="span5"></span> )</span>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <input type="button" class="btn btn-primary" onclick="add_room_friend(this)" value="提交"
+                               data-dismiss="modal">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 聊天室模态框end -->
+
+    <!-- websocket进度框模态框 -->
+    <div class="modal fade" id="websocket" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+         data-backdrop="static">
+        <div class="modal-dialog" role="document" style="padding-right: 0px;width: 1200px;height: 700px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true" onclick="WebSocket_close()">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">登陆进度查询</h4>
+                    <div class="modal-body" id="code_input"
+                         style="height: 530px;overflow: hidden;margin:0;font-family:'微软雅黑';">
+                        <div class="progress">
+                            <div class="progress-bar" id="progress_bar" role="progressbar" aria-valuenow="0"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100" style="min-width: 2em;width: 0%;">
+                                0%
+                            </div>
+                        </div>
+                        <div class="row" id="login_code">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="WebSocket_close()">
+                            return
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- websocket模态框end -->
+
+    <!-- 执行进度框模态框 -->
+    <div class="modal fade" id="progress" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+         data-backdrop="static">
+        <div class="modal-dialog" role="document" style="padding-right: 0px;width: 1200px;height: 700px;">
+            <div class="modal-content" style="width: calc(100% + 17px);">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true" onclick="WebSocket_close()">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">执行进度</h4>
+                    <div id="progress_info" style="overflow-y: auto;height: 500px;overflow-x: hidden;">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="WebSocket_close()">
+                            return
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 执行进度框模态框end -->
+
+
+    <script type="text/javascript">
+        var ws = null;
+
+        // websocket
+        function WebSocketconnect(url) {
+            if ("WebSocket" in window) {
+                var ws_url = "ws://" + window.location.host + "/" + url + "/";
+                ws = new WebSocket(ws_url);
+
+            } else {
+                // 浏览器不支持 WebSocket
+                alert("您的浏览器不支持 WebSocket!");
+            }
+        }
+
+
+        function ajax_send_code(id) {
+            var input_id = "#input_" + id;
+            var div_id = "#div_" + id;
+            var data = {
+                phone_number: id, code: $(input_id).val(),
+            };
+            $.ajax(
+                {
+                    url: "/code/",
+                    type: "post",
+                    data: data,
+                    success: function (data) {
+                        alert(data.code + " : " + data.msg);
+                        if (data.code == 200) {
+                            $(div_id).remove();
+                        }
+                    }
+                }
+            )
+
+
+        }
+
+
+    </script>
+
+    <script type="text/javascript">
+        function check_all() {
+            console.log(this);
+            $("input[name='phone_list']").attr("checked", "true");
+        }
+
+        function check_no_all() {
+            $("input[name='phone_list']").removeAttr("checked");
+        }
+
+        function add0(m) {
+            return m < 10 ? '0' + m : m
+        }
+
+        function format(shijianchuo) {
+            //shijianchuo是整数，否则要parseInt转换
+            var time = new Date(shijianchuo * 1000);
+            var y = time.getFullYear();
+            var m = time.getMonth() + 1;
+            var d = time.getDate();
+            var h = time.getHours();
+            var mm = time.getMinutes();
+            var s = time.getSeconds();
+            return y + '-' + add0(m) + '-' + add0(d) + ' ' + add0(h) + ':' + add0(mm) + ':' + add0(s);
+        }
+    </script>
+
+
+    <script type="text/javascript">
+
+        // 关闭ws
+        function WebSocket_close() {
+            console.log("关闭", ws);
+            ws.send("quit");
+            ws.onclose = function (e) {
+                ws.close()
+            };
+
+        }
+
+        // 执行任务进度条查询
+        function ws_progress_bar() {
+            var progress_info = $("#progress_info");
+            progress_info.empty();
+            $('#progress').modal('show');
+            WebSocketconnect("Progressbar");
+            ws.onmessage = function (evt) {
+                var received_dict = JSON.parse(evt.data);
+                var html = '';
+                for (var j = 0; j < received_dict.record_list.length; j++) {
+                    var value_dict = received_dict.record_list[j];
+                    var wait_date = format(value_dict.wait_time);
+                    var prog_id = value_dict.uuid;
+                    var id = "#" + prog_id;
+                    if ($(id).text()) {
+                    } else {
+                        html = '<div class="row">\n' +
+                            '                            <div class="col-sm-4">\n' +
+                            '                                <span>' + value_dict.instruct + '</span>\n' +
+                            '                                <span title="' + value_dict.devices + '">操作设备</span>\n' +
+                            '                                <span>' + wait_date + '</span>\n' +
+                            '                            </div>\n' +
+                            '                            <dvi class=" col-lg-8">\n' +
+                            '                                <div class="progress">\n' +
+                            '                                    <div class="progress-bar" id="' + prog_id + '" role="progressbar" aria-valuenow="0"\n' +
+                            '                                         aria-valuemin="0"\n' +
+                            '                                         aria-valuemax="100" style="min-width: 2em;width: 0%;">\n' +
+                            '                                        0%\n' +
+                            '                                    </div>\n' +
+                            '                                </div>\n' +
+                            '                            </dvi>\n' +
+                            '                        </div>';
+                        progress_info.prepend(html);
+                    }
+                    $(id).css("width", value_dict.progress + "%");
+                    $(id).prop("aria-valuenow", value_dict.progress);
+                    $(id).text(value_dict.progress + "%")
+                }
+            };
+
+        }
+
+
+    </script>
+
+    <script type="text/javascript">
+        // 启动zalo
+        function start_zalo(hits) {
+            var str = "";
+            $("input[name='phone_list']:checked").each(function (index, item) {
+                if ($("input[name='phone_list']:checked").length - 1 == index) {
+                    str += $(this).val();
+                } else {
+                    str += $(this).val() + ",";
+                }
+            });
+            if (str.length < 1) {
+                alert("Please select a running device")
+            } else {
+                $.ajax(
+                    {
+                        url: "/phone/",
+                        type: "post",
+                        data: {
+                            phone_list: str,
+                            instruct: "start_zalo",
+                            content: {}
+                        },
+                        success: function (data) {
+                            alert(data.code + " :" + data.msg);
+                            if (data.code == 200) {
+                                console.log(data.redis_progress_bar);
+                                redis_progress_bar = data.redis_progress_bar;
+                                Web_Socket();
+                                WebSocketconnect("websocket");
+                                ws.onmessage = function (evt) {
+                                    var received_msg = JSON.parse(evt.data);
+                                    if (received_msg.phone_number) {
+                                        var input_html = '<div class="col-lg-4" style="padding-top: 25px;" id="div_' + received_msg.phone_number + '" >\n' +
+                                            '                            <div class="input-group">\n' +
+                                            '\n' +
+                                            '                                <input type="text" class="form-control" id="input_' + received_msg.phone_number + '" placeholder="' + received_msg.phone_number + '">\n' +
+                                            '                                <span class="input-group-btn">\n' +
+                                            '                                <button class="btn btn-default" type="button" onclick="ajax_send_code(' + received_msg.phone_number + ')">Go!</button>\n' +
+                                            '                             </span>\n' +
+                                            '                            </div>\n' +
+                                            '                        </div>';
+                                        $("#login_code").prepend(input_html);
+                                    }
+                                    $("#progress_bar").css("width", received_msg.progress_bar + "%");
+                                    $("#progress_bar").prop("aria-valuenow", received_msg.progress_bar);
+                                    $("#progress_bar").text(received_msg.progress_bar + "%")
+                                };
+                                ws.onclose = function (e) {
+                                    ws.close()
+                                };
+                            }
+                        }
+                    }
+                );
+            }
+        }
+
+        // 通过手机号添加好友
+        function add_phone_number_ajax() {
+            var str = "";
+            $("input[name='phone_list']:checked").each(function (index, item) {
+                if ($("input[name='phone_list']:checked").length - 1 == index) {
+                    str += $(this).val();
+                } else {
+                    str += $(this).val() + ",";
+                }
+            });
+            if (str.length < 1) {
+                alert("Please select a running device")
+            } else {
+                var formData = new FormData();
+                var add_phone_number_file = $("#add_phone_number_file")[0].files[0];
+                var add_phone_number_call = $("#add_phone_number_call")[0].files[0];
+                formData.append("add_phone_number_file", add_phone_number_file);
+                formData.append("add_phone_number_call", add_phone_number_call);
+                formData.append("instruct", "Add_Phone_number_friend");
+                formData.append("phone_list", str);
+                //触发 文件选择的click事件
+                $.ajax(
+                    {
+                        url: "/phone/",
+                        type: "post",
+                        processData: false,
+                        contentType: false,
+                        data: formData,
+                        success: function (data) {
+                            alert(data.code + " :" + data.msg)
+                        }
+                    }
+                )
+            }
+
+        }
+
+        // 导入联系人，弹出文件模态框
+        function selectFile() {
+
+            var str = "";
+            $("input[name='phone_list']:checked").each(function (index, item) {
+                if ($("input[name='phone_list']:checked").length - 1 == index) {
+                    str += $(this).val();
+                } else {
+                    str += $(this).val() + ",";
+                }
+            });
+            alert(str);
+            if (str.length < 1) {
+                alert("Please select a running device")
+            } else {
+                //触发 文件选择的click事件
+                $("#file").trigger("click");
+            }
+        }
+
+        function getFilePath(event) {
+            var str = "";
+            $("input[name='phone_list']:checked").each(function (index, item) {
+                if ($("input[name='phone_list']:checked").length - 1 == index) {
+                    str += $(this).val();
+                } else {
+                    str += $(this).val() + ",";
+                }
+            });
+            if (str.length < 1) {
+                alert("Please select a running device")
+            } else {
+                var file = $("#file")[0].files[0];
+                var formData = new FormData();
+                formData.append("file", file);
+                formData.append("phone_list", str);
+                formData.append("instruct", "address_book");
+                console.log(str, file);
+                $.ajax(
+                    {
+                        url: "/phone/",
+                        type: "post",
+                        processData: false,
+                        contentType: false,
+                        data: formData,
+                        success: function (data) {
+                            alert(data.code + " :" + data.msg)
+                        }
+                    }
+                )
+            }
+        }
+
+        // 发送朋友圈
+        function send_Circle(hits) {
+            var str = "";
+            $("input[name='phone_list']:checked").each(function (index, item) {
+                if ($("input[name='phone_list']:checked").length - 1 == index) {
+                    str += $(this).val();
+                } else {
+                    str += $(this).val() + ",";
+                }
+            });
+            if (str.length < 1) {
+                alert("Please select a running device")
+            } else {
+                var photo_list = new Array();
+                var formData = new FormData();
+                var latitude = $("#send_friends_latitude").text();
+                var longitude = $("#send_friends_longitude").text();
+                var photo = $("#send_friends_photo")[0].files;
+                var text_content = $("#send_friends_content")[0].files[0];
+                console.log(text_content);
+                for (p in photo) {
+                    photo_list.push(p);
+                    formData.append(p, photo[p]);
+                }
+                formData.append("photo_list", photo_list);
+                formData.append("phone_list", str);
+                formData.append("text_content", text_content);
+                formData.append("latitude", latitude);
+                formData.append("longitude", longitude);
+                formData.append("instruct", "send_circle_of_friends");
+                $.ajax(
+                    {
+                        url: "/phone/",
+                        type: "post",
+                        processData: false,
+                        contentType: false,
+                        data: formData,
+                        success: function (data) {
+                            alert(data.code + " :" + data.msg)
+                        }
+                    }
+                )
+            }
+        }
+
+        // 群发已加好友
+        function send_Allfriend(hits) {
+            var str = "";
+            $("input[name='phone_list']:checked").each(function (index, item) {
+                if ($("input[name='phone_list']:checked").length - 1 == index) {
+                    str += $(this).val();
+                } else {
+                    str += $(this).val() + ",";
+                }
+            });
+            if (str.length < 1) {
+                alert("Please select a running device")
+            } else {
+                var formData = new FormData();
+                var photo_list = new Array();
+                var photo = $("#Group_send_photo")[0].files;
+                for (p in photo) {
+                    photo_list.push(p);
+                    formData.append(p, photo[p]);
+                }
+                var text_content = $("#Group_send_content")[0].files[0];
+                var time_out = $("#time_out").val();
+                console.log("还没报错")
+                formData.append("phone_list", str);
+                formData.append("photo_list", photo_list);
+                formData.append("text_content", text_content);
+                formData.append("time_out", time_out);
+                formData.append("instruct", "Group_send_message");
+                $.ajax(
+                    {
+                        url: "/phone/",
+                        type: "post",
+                        processData: false,
+                        contentType: false,
+                        data: formData,
+                        success: function (data) {
+                            alert(data.code + " : " + data.msg)
+                        }
+                    }
+                )
+            }
+        }
+
+        // 添加附近人
+        function add_people_nearby(hits) {
+            var str = "";
+            $("input[name='phone_list']:checked").each(function (index, item) {
+                if ($("input[name='phone_list']:checked").length - 1 == index) {
+                    str += $(this).val();
+                } else {
+                    str += $(this).val() + ",";
+                }
+            });
+            if (str.length < 1) {
+                alert("Please select a running device")
+            } else {
+                var formData = new FormData();
+                var photo_list = new Array();
+                var add_file = $("#add_nearby_txt")[0].files[0];
+                var photo = $("#add_nearby_photo")[0].files;
+                var send_count = $("#send_count").val();
+                var add_count = $("#add_count").val();
+                var add_sleep = $("#add_sleep").val();
+                var sex = $("#sex").val();
+                var latitude = $("#add_people_latitude").text();
+                var longitude = $("#add_people_longitude").text();
+                for (p in photo) {
+                    photo_list.push(p);
+                    formData.append(p, photo[p]);
+                }
+                formData.append("phone_list", str);
+                formData.append("photo_list", photo_list);
+                formData.append("add_sleep", add_sleep);
+                formData.append("add_file", add_file);
+                formData.append("send_count", send_count);
+                formData.append("add_count", add_count);
+                formData.append("sex", sex);
+                formData.append("latitude", latitude);
+                formData.append("longitude", longitude);
+                formData.append("instruct", "Add_people_nearby");
+                $.ajax(
+                    {
+                        url: "/phone/",
+                        type: "post",
+                        processData: false,
+                        contentType: false,
+                        data: formData,
+                        success: function (data) {
+                            alert(data.code + " : " + data.msg)
+                        }
+                    }
+                )
+            }
+        }
+
+        // 定位
+        function change_gps(hits) {
+            var str = "";
+            $("input[name='phone_list']:checked").each(function (index, item) {
+                if ($("input[name='phone_list']:checked").length - 1 == index) {
+                    str += $(this).val();
+                } else {
+                    str += $(this).val() + ",";
+                }
+            });
+            if (str.length < 1) {
+                alert("Please select a running device")
+            } else {
+                var latitude = $("#latitude").text();
+                var longitude = $("#longitude").text();
+                $.ajax(
+                    {
+                        url: "/phone/",
+                        type: "post",
+                        data: {
+                            instruct: "Change_gps", latitude: latitude,
+                            longitude: longitude, phone_list: str
+                        },
+                        success: function (data) {
+                            alert(data.code + " : " + data.msg)
+                        }
+                    }
+                )
+            }
+        }
+
+        // 获取群组信息
+        function update_class_room_name() {
+            var room_index = $("#room_class").val();
+            // 拉取最新数据
+            $.ajax(
+                {
+                    url: "/getroom/",
+                    type: "get",
+                    data: {
+                        room_class_index: room_index,
+                    },
+                    success: function (data) {
+                        if (data.code == 200) {
+                            $("#room_name_select").empty();
+                            for (i = 0; i < data.data.length; i++) {
+                                $("#room_name_select").append("<option value='" + data.data[i] + "'>" + data.data[i] + "</option>");
+                            }
+
+                        } else {
+                            alert(data.msg)
+                        }
+                    }
+                }
+            );
+
+
+        }
+
+        // 聊天室
+        function add_room_friend() {
+            var str = "";
+            $("input[name='phone_list']:checked").each(function (index, item) {
+                if ($("input[name='phone_list']:checked").length - 1 == index) {
+                    str += $(this).val();
+                } else {
+                    str += $(this).val() + ",";
+                }
+            });
+            if (str.length < 1) {
+                alert("Please select a running device")
+            } else {
+                // 内容
+                var formData = new FormData();
+                var photo_list = new Array();
+                var call_file = $("#room_text_content")[0].files[0];
+                var room_index = $("#room_class").val();
+                var room_sleep = $("#room_sleep").val();
+                var room_name = $("#room_name_select").val();
+                var room_send_count = $("#room_send_count").val();
+                var room_add_count = $("#room_add_count").val();
+                var photo = $("#room_friends_photo")[0].files;
+                for (p in photo) {
+                    photo_list.push(p);
+                    formData.append(p, photo[p]);
+                }
+
+                formData.append("photo_list", photo_list);
+                formData.append("call_file", call_file);
+                formData.append("room_send_count", room_send_count);
+                formData.append("room_add_count", room_add_count);
+                formData.append("room_index", room_index);
+                formData.append("room_sleep", room_sleep);
+                formData.append("room_name", room_name);
+                formData.append("phone_list", str);
+                formData.append("instruct", "Add_Chat_Rooms_Friend");
+                $.ajax(
+                    {
+                        url: "/phone/",
+                        type: "post",
+                        processData: false,
+                        contentType: false,
+                        data: formData,
+                        success: function (data) {
+                            alert(data.code + " : " + data.msg)
+                        }
+                    }
+                );
+            }
+        }
+
+
+    </script>
+    <script src="/static/jquery-3.1.1.min.js"></script>
+    <script>
+        var phone_obj = {{ phone_all|safe }};
+        getPage(1);
+
+        function getPage(pn) {
+            var dataCount = phone_obj.length;
+            var pageSize = 27;//每页显示条数
+            var pageCount = Math.ceil(dataCount / pageSize);//总页数
+            if (pn == 0 || pn > pageCount) {
+                return
+            }
+            var ul = $("#urlist1");
+            ul.empty();
+            // console.log(pageCount+"..."+pn)
+            paintPage(pageCount, pn);   //绘制页码
+            var startPage = pageSize * (pn - 1);
+
+            // 当前最大索引
+            var now_index = pn * pageSize;
+            // 当前最小索引
+            var small_index = now_index - pageSize - 1;
+            if (pageCount == 1) {     // 当只有一页时
+                for (var j = 0; j < dataCount; j++) {
+                    small_index++;
+                    if (phone_obj[small_index].phone_status == 2) {
+                        var e = '<div class="col-lg-2"><img class="phone_wabei" src="/static/img/pindex.png"><div><input type="checkbox" name="phone_list" id="phone_list"' +
+                            'value="' + phone_obj[small_index].phone_id + '">' + phone_obj[small_index].phone_name +
+                            '</div></div>';
+                    } else if (phone_obj[small_index].phone_status == 0) {
+                        var e = '<div class="col-lg-2"><img class="phone_wabei" src="/static/img/nphone_off.png"><div><input type="checkbox" name="phone_list" id="phone_list"' +
+                            'value="' + phone_obj[small_index].phone_id + '">' + phone_obj[small_index].phone_name +
+                            '</div></div>';
+                    } else {
+                        var e = '<div class="col-lg-2"><img class="phone_wabei" src="/static/img/nphone_fault.png"><div><input type="checkbox" name="phone_list" id="phone_list"' +
+                            'value="' + phone_obj[small_index].phone_id + '">' + phone_obj[small_index].phone_name +
+                            '</div></div>';
+                    }
+                    ul.append(e);
+                }
+            } else {      // 当超过一页时
+                var e = "";
+                var endPage = pn < pageCount ? pageSize * pn : dataCount;
+                for (var j = startPage; j < endPage; j++) {
+                    small_index++;
+                    if (phone_obj[small_index].phone_status == 2) {
+                        var e = '<div class="col-lg-2"><img class="phone_wabei" src="/static/img/pindex.png"><div><input type="checkbox" name="phone_list" id="phone_list"' +
+                            'value="' + phone_obj[small_index].phone_id + '">' + phone_obj[small_index].phone_name +
+                            '</div></div>';
+                    } else if (phone_obj[small_index].phone_status == 0) {
+                        var e = '<div class="col-lg-2"><img class="phone_wabei" src="/static/img/nphone_off.png"><div><input type="checkbox" name="phone_list" id="phone_list"' +
+                            'value="' + phone_obj[small_index].phone_id + '">' + phone_obj[small_index].phone_name +
+                            '</div></div>';
+                    } else {
+                        var e = '<div class="col-lg-2"><img class="phone_wabei" src="/static/img/nphone_fault.png"><div><input type="checkbox" name="phone_list" id="phone_list"' +
+                            'value="' + phone_obj[small_index].phone_id + '">' + phone_obj[small_index].phone_name +
+                            '</div></div>';
+                    }
+                    ul.append(e);
+                }
+            }
+        }
+
+        //绘制页码
+        function paintPage(number, currNum)  //number 总页数,currNum 当前页
+        {
+            var pageUl = $("#fenye");
+            pageUl.empty();
+            var ulDetail = "";
+            if (number == 1) {
+                ulDetail = "<li class=\"prev\"><a href=\"javascript:void(0)\">上一页</a></li>" +
+                    "<li class=\"numb choose\"><a href=\"javascript:getPage(1)\">1</a></li>" +
+                    "<li class=\"next\"><a href=\"javascript:void(0)\">下一页</a></li>";
+            } else if (number == 2) {
+                ulDetail = "<li class=\"prev\"><a href=\"javascript:getPage(1)\">上一页</a></li>" +
+                    "<li class=\"numb" + choosele(currNum, 1) + "\"><a href=\"javascript:getPage(1)\">1</a></li>" +
+                    "<li class=\"numb" + choosele(currNum, 2) + "\"><a href=\"javascript:getPage(2)\">2</a></li>" +
+                    "<li class=\"next\"><a href=\"javascript:getPage(2)\">下一页</a></li>";
+            } else if (number == 3) {
+                ulDetail = "<li class=\"prev\"><a href=\"javascript:getPage(" + parseInt(currNum - 1) + ")\">上一页</a></li>" +
+                    "<li class=\"numb" + choosele(currNum, 1) + "\"><a href=\"javascript:getPage(1)\">1</a></li>" +
+                    "<li class=\"numb" + choosele(currNum, 2) + "\"><a href=\"javascript:getPage(2)\">2</a></li>" +
+                    "<li class=\"numb" + choosele(currNum, 3) + "\"><a href=\"javascript:getPage(3)\">3</a></li>" +
+                    "<li class=\"next\"><a href=\"javascript:getPage(" + parseInt(currNum + 1) + ")\">下一页</a></li>";
+            } else if (number == currNum && currNum > 3) {
+                ulDetail = "<li class=\"prev\"><a href=\"javascript:getPage(" + parseInt(currNum - 1) + ")\">上一页</a></li>" +
+                    "<li class=\"numb\"><a href=\"javascript:getPage(" + parseInt(currNum - 2) + ")\">" + parseInt(currNum - 2) + "</a></li>" +
+                    "<li class=\"numb\"><a href=\"javascript:getPage(" + parseInt(currNum - 1) + ")\">" + parseInt(currNum - 1) + "</a></li>" +
+                    "<li class=\"numb choose\"><a href=\"javascript:getPage(" + currNum + ")\">" + currNum + "</a></li>" +
+                    "<li class=\"next\"><a href=\"javascript:getPage(" + currNum + ")\">下一页</a></li>";
+            } else if (currNum == 1 && number > 3) {
+                ulDetail = "<li class=\"prev\"><a href=\"javascript:void(0)\">上一页</a></li>" +
+                    "<li class=\"numb choose\"><a href=\"javascript:void(0)\">1</a></li>" +
+                    "<li class=\"numb\"><a href=\"javascript:getPage(2)\">2</a></li>" +
+                    "<li class=\"numb\"><a href=\"javascript:getPage(3)\">3</a></li>" +
+                    "<li class=\"next\"><a href=\"javascript:getPage(2)\">下一页</a></li>";
+            } else {
+                ulDetail = "<li class=\"prev\"><a href=\"javascript:getPage(" + parseInt(currNum - 1) + ")\">上一页</a></li>" +
+                    "<li class=\"numb\"><a href=\"javascript:getPage(" + parseInt(currNum - 1) + ")\">" + parseInt(currNum - 1) + "</a></li>" +
+                    "<li class=\"numb choose\"><a href=\"javascript:getPage(" + currNum + ")\">" + currNum + "</a></li>" +
+                    "<li class=\"numb\"><a href=\"javascript:getPage(" + parseInt(currNum + 1) + ")\">" + parseInt(currNum + 1) + "</a></li>" +
+                    "<li class=\"next\"><a href=\"javascript:getPage(" + parseInt(currNum + 1) + ")\">下一页</a></li>";
+            }
+
+            $("#fenye").append(ulDetail);
+
+        }
+
+        function choosele(num, cur) {
+            if (num == cur) {
+                return " choose";
+            } else {
+                return "";
+            }
+        }
+
+    </script>
+{% endblock %}

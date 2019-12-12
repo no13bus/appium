@@ -1,0 +1,89 @@
+{% extends 'BaseTemplate/Base_tempaltes.html' %}
+{% block css %}
+    {{ block.super }}
+{% endblock %}
+{% block table %}
+    <div class="col-md-11 right_page">
+        <ul class="nav nav-pills" style="background:rgb(255, 255, 255);">
+            <li role="presentation" class="active" style=" padding-top: 18px;">
+                <img src="/static/img/blackserver.png"> Super Admin
+            </li>
+            <!--用户显示开始-->
+                {% include 'BaseTemplate/userinfo.html' %}
+            <!-- 用户显示结束-->
+        </ul>
+        <div style="background:rgb(247, 249, 255); color: rgb(247, 249, 255);">
+            pass
+        </div>
+        <!--表格-->
+        <div class="panel panel-info">
+            <!--头-->
+            <div class="panel-heading">
+                <div class="row">
+                    <!-- 左边服务器列表-->
+                    <div class="col-lg-2">
+                        <div class="btn-group" role="group">
+                            <a href="/superuser/0">
+                                <button type="button" class="btn btn-default dropdown-toggle">Add User
+                                </button>
+                            </a>
+                            <ul class="dropdown-menu">
+                                {% for server in server_all %}
+                                    <li><a href="/server/{{ server.id }}">{{ server.ip }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                    </div>
+                </div>
+            </div>
+            <!--表格内容-->
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>number</th>
+                        <th>ID</th>
+                        <th>Devices</th>
+                        <th>last login</th>
+                        <th>Status</th>
+                        <th>join date</th>
+                        <th>operation</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% include 'user/user_table.html' %}
+                    </tbody>
+                </table>
+            </div>
+            <div style="Float:right">
+                {% include "BaseTemplate/page.html" %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 删除管理员
+        function delete_user(hits) {
+            res = confirm("删除是不可恢复的，你确认要删除吗？");
+            if (res) {
+                var url = "/superuser/" + hits.id + "/";
+                $.ajax({
+                    url: url,
+                    type: "delete",
+                    success: function (data) {
+                        if (data.code == 200) {
+                            document.getElementById(hits.id).parentNode.parentNode.remove();
+                            alert(data.msg);
+                            location.reload()
+                        } else {
+                            alert(data.msg);
+                            location.reload()
+                        }
+                    }
+                })
+            }
+        }
+    </script>
+{% endblock %}

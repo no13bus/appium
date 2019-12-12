@@ -1,0 +1,169 @@
+{% extends 'BaseTemplate/Base_tempaltes.html' %}
+{% block css %}
+    {{ block.super }}
+{% endblock %}
+{% block table %}
+    <div class="col-md-11 right_page">
+        <ul class="nav nav-pills" style="background:rgb(255, 255, 255);">
+            <li role="presentation" class="active" style=" padding-top: 18px;">
+                <img src="/static/img/records_black.png"> Operation Log
+            </li>
+            <!--用户显示开始-->
+            {% include 'BaseTemplate/userinfo.html' %}
+            <!-- 用户显示结束-->
+        </ul>
+        <div style="background:rgb(247, 249, 255); color: rgb(247, 249, 255);">
+            pass
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="row">
+                    <!-- 左边服务器列表-->
+                    {% if is_superuser %}
+                        <div class="col-lg-1" style="width: 110px;">
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                    User Name
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    {% for user in user_all %}
+                                        <li><a href="/records/?user_id={{ user.id }}">{{ user.username }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-1" style="width: 96px;">
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                    ZALO ID
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    {% for zalo in zalo_all %}
+                                        <li><a href="/records/?zalo_id={{ zalo.id }}">{{ zalo.phone }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="col-lg-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Nhập số điện thoại của ZALO" id="zaloinfo">
+                            <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" onclick="show_zalo()">Go!</button>
+                          </span>
+                        </div><!-- /input-group -->
+                    </div>
+                    <div class="col-lg-2" style="">
+                        <input type="text" class="form-control" id="item_keyword" name="item_keyword"
+                               placeholder="Nhập bộ lọc từ khóa" style="width: 226px;">
+                    </div>
+
+                </div>
+            </div>
+            <!-- Table -->
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Nhân viên</th>
+                        <th>Thiết bị</th>
+                        <th>Số điện thoại</th>
+                        <th>Gửi tin cho bạn bè</th>
+                        <th>Số lượng lời mời kết bạn</th>
+                        <th>Gửi tin cho người lạ</th>
+                        <th>Số lượng thông qua kết bạn</th>
+                        <th>Lệnh điều khiển của tool</th>
+                        <th>Chụp hình cắt</th>
+                        <th>Miêu tả</th>
+                        <th>Thời gian</th>
+                        <th>Thao tác</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% include 'records/records_table.html' %}
+                    </tbody>
+                </table>
+            </div>
+            <div style="Float:right">
+                {% include "BaseTemplate/page.html" %}
+            </div>
+        </div>
+
+    </div>
+
+    <!--图片模态-->
+    <div class="modal fade" id="show_screenshot" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document" style="padding-right: 0px;width: 400px;height: 200px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Chụp hình cắt</h4>
+                </div>
+                <div class="modal-body" style="height: auto">
+                    <div id="src_photo">
+                        <img src="" alt="">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--图片模态end-->
+    <script src="/static/jquery-3.1.1.min.js"></script>
+    <script>
+        /* 实时搜索框,及点击按钮全选\取消*/
+        $('#item_keyword').on('input propertychange', function () {
+            $('table tbody tr').hide()
+                .filter(":contains('" + ($(this).val()) + "')")
+                .show();
+        });
+    </script>
+
+    <script>
+        // 查看截图
+        function show_screenshot(url) {
+            // 打开模态框
+            $('#show_screenshot').modal('show');   //手动打开方式
+            console.log("没报错", url);
+            $("#src_photo").empty();
+            $("#src_photo").prepend('<img src="' + url + '" alt="" style="width: 100%;display: block;margin: 0 auto;">');
+        }
+
+        // 获取对应的zalo账号记录
+        function show_zalo() {
+            window.location.href="?phonenumber=" + $("#zaloinfo").val();
+        }
+
+
+    </script>
+
+
+    <script type="text/javascript">
+        // 删除记录
+        function delete_result(id) {
+            res = confirm("Deletion is unrecoverable are you sure?");
+            if (res) {
+                var url = "/records/" + id + "/";
+                $.ajax({
+                    url: url,
+                    type: "delete",
+                    success: function (data) {
+                        if (data.code == 200) {
+                            document.getElementById(id).parentNode.parentNode.remove();
+                            alert(data.msg);
+                        } else {
+                            alert(data.msg);
+                        }
+                    }
+                })
+            }
+        }
+    </script>
+{% endblock %}

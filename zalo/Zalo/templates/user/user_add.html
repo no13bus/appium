@@ -1,0 +1,241 @@
+{% extends 'BaseTemplate/Base_tempaltes.html' %}
+{% block css %}
+    {{ block.super }}
+{% endblock %}
+{% block table %}
+    <style>
+        .set {
+            width: 140px;
+        }
+
+        .con {
+            background: #4165EB;
+            height: 100vh;
+        }
+
+        .con1 {
+            background: #3e8f3e;
+            width: 100vh;
+        }
+
+        .li_o {
+            background: #274DDA;
+            width: 50px;
+            border: none;
+        }
+
+        .dibu {
+            position: fixed;
+            bottom: 0;
+        }
+
+        .but_tm {
+            background: transparent;
+            width: 50px;
+            border: none;
+        }
+
+        .but_tmt {
+            background: transparent;
+            width: 50px;
+            border: none;
+        }
+
+        .user_but {
+            background: transparent;
+            width: 50px;
+            border: none;
+
+        }
+
+        .right_page {
+            padding-left: 0px;
+        }
+
+        .modal-body {
+            height: 185px;
+        }
+
+        .col-lg-3 {
+            padding-top: 7px
+        }
+
+        .pwd {
+            padding-left: 0px;
+            padding-top: 7px;
+        }
+
+        a {
+            cursor: pointer
+        }
+    </style>
+    <div class="col-md-11 right_page">
+        <ul class="nav nav-pills" style="background:rgb(255, 255, 255);">
+            <li role="presentation" class="active" style=" padding-top: 18px;">
+                <img src="/static/img/blackserver.png"> Super Admin
+            </li>
+            <!--用户显示开始-->
+                {% include 'BaseTemplate/userinfo.html' %}
+            <!-- 用户显示结束-->
+        </ul>
+        <div style="background:rgb(247, 249, 255); color: rgb(247, 249, 255);">
+            pass
+        </div>
+        <!--表格-->
+        <div class="panel panel-default" style="height: auto">
+            <!--头-->
+            <div class="panel-heading" style="padding: 10px 15px 25px 15px">
+                <span>ADD User</span>
+            </div>
+            <!--from表单-->
+            <div class="panel-body form-horizontal">
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="username" class="control-label col-sm-3 col-lg-3">Phone:</label>
+                        <div class="col-sm-7 col-lg-7">
+                            <input type="text" class="form-control" id="username" name="username"
+                                   value="{{ user_info.username }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="password" class="control-label col-sm-3 col-lg-3">PassWord:</label>
+                        <div class="col-sm-7 col-lg-7">
+                            <input type="password" class="form-control" id="password" name="password"
+                                   value="{{ user_info.phone }}">
+                        </div>
+                        <a class="col-sm-2 col-lg-2 pwd" onclick="pwdvisible(this)">可见</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="" class="control-label col-sm-3 col-lg-3">Status:</label>
+                        <div class="col-sm-3 col-lg-3">
+                            <p><input type="radio" name="is_active" value="1" id="is_active"/>allow</p>
+                        </div>
+                        <div class="col-sm-3 col-lg-3">
+                            <p><input type="radio" name="is_active" value="0" id="is_active"/>forbid</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 设备权限 -->
+                <div class="row" style="padding-left: 34px;">
+                    <div class="form-group col-md-2 set">
+                        <label for="" style="padding-left: 52px;">Devices:</label>
+                    </div>
+                    <div class="col-md-8" style="height:auto;width: auto; border: 1px dashed #000">
+                        {% for phone in  phone_all %}
+                            {% if phone.status == 1 %}
+                                <div style="float:left;padding:0 5px;">
+                                    <input style="margin-bottom:5px;" type="checkbox" name="mobile_list"
+                                           value="{{ phone.phone_id }}"
+                                           id="mobile_list" checked/>{{ phone.phone_id }}
+                                </div>
+                            {% elif phone.status == 2 %}
+                                <div style="float:left;padding:0 5px;">
+                                    <input style="margin-bottom:5px;" type="checkbox" name="mobile_list"
+                                           value="{{ phone.phone_id }}"
+                                           disabled id="mobile_list"/>{{ phone.phone_id }}
+                                </div>
+                            {% else %}
+                                <div style="float:left;padding:0 5px;">
+                                    <input style="margin-bottom:5px;" type="checkbox" name="mobile_list"
+                                           value="{{ phone.phone_id }}"
+                                           id="mobile_list"/>{{ phone.phone_id }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- 设备end -->
+
+                <!-- 提交按钮 -->
+                <div class="row">
+                    <div class="form-group col-md-4" style="padding-left: 100px;">
+                        <button type="button" class="btn btn-default" onclick="user_cancel()">return</button>
+                        <button type="button" class="btn btn-primary" onclick="add_user()" id="user_butt"
+                                value="{{ user_info.id }}">submit
+                        </button>
+                    </div>
+                </div>
+                <!-- 提交按钮end -->
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        // 设置密码可见
+        var isShow = true;
+
+        function pwdvisible(obj) {
+            if (isShow) {
+                $("#password").attr("type", "text");
+                isShow = false;
+                obj.innerText = "不可见"
+            } else {
+                $("#password").attr("type", "password");
+                isShow = true;
+                obj.innerText = "可见"
+            }
+        }
+
+
+        function click_model(obj) {
+            var list = obj.parentNode.parentNode.children; // 根据当前点击标签找到tr标签
+            // tr标签可以通过索引取值获取对应的值
+            var id = list[0].innerText;
+            var url = document.location.origin;
+            window.location.href = url + "/superuser/" + id + "/";
+
+        }
+
+        function user_cancel() {
+            var url = document.location.origin;
+            window.location.href = url + "/superuser/";
+
+        }
+
+        function add_user() {
+            var user_id = $("#user_butt").val();
+            var url = "/superuser/";
+            if (user_id) {
+                url = url + user_id + "/"
+            }
+            var mobile_list = "";
+            $("input[name='mobile_list']:checked").each(function (index, item) {
+                if ($("input[name='mobile_list']:checked").length - 1 == index) {
+                    mobile_list += $(this).val();
+                } else {
+                    mobile_list += $(this).val() + ",";
+                }
+            });
+            var username = $("#username").val();
+            var password = $("#password").val();
+            var is_active = $("input[name='is_active']:checked").val();
+            console.log(username, password, is_active, mobile_list);
+            var base_url = document.location.origin;
+            $.ajax({
+                url: url,
+                type: "post",
+                data:{
+                    username:username, password:password,
+                    is_active:is_active, mobile_list:mobile_list
+
+                },
+                success: function (data) {
+                    if (data.code == 200) {
+                        alert(data.msg);
+                         window.location.href = base_url + "/superuser/";
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            })
+
+        }
+
+    </script>
+
+{% endblock %}

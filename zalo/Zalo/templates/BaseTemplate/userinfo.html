@@ -1,0 +1,12 @@
+<li style="float:right">
+    <img src="/static/img/portrait.png" style="width: 70px">
+</li>
+<li style="float:right; padding-top: 12px;">
+    <ul>
+        <li style="list-style: none;"><span>Welcome {{ request.user.username }}</span></li>
+        <li style="list-style: none;float:right">
+            <a href="/logout/" class="user_but">logout</a>
+            <img src="/static/img/quit.png">
+        </li>
+    </ul>
+</li>

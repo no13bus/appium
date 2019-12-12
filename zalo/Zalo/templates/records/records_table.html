@@ -1,0 +1,26 @@
+{% for i in records_all %}
+    <tr class="gradeA odd" role="row">
+        <td class="center">{{ i.device }}</td>
+        <td class="center">{{ i.username }}</td>
+        <td class="center">{{ i.zalophone }}</td>
+        <td class="center">{{ i.send_msg }}</td>
+        <td class="center">{{ i.add_friend }}</td>
+        <td class="center">{{ i.send_stranger }}</td>
+        <td class="center">{{ i.accept_request }}</td>
+
+        <td class="center">{{ i.VietnamOperation }}</td>
+        {% if i.screenshot_url %}
+            <td class="center"><button class="btn btn-xs btn-info btn-edit"  onclick="show_screenshot('{{ i.screenshot_url }}')">Kiểm tra</button></td>
+        {% else %}
+            <td class="center"><button class="btn btn-xs btn-info btn-edit">Không có</button></td>
+        {% endif %}
+        <td class="center" title="{{ i.description }}">{{ i.description|truncatechars:20 }}</td>
+        <td class="center">{{ i.date_time }}</td>
+        <td class="center">
+            <button class="btn btn-xs btn-danger btn-edit" onclick="delete_result({{ i.id }})" id="{{ i.id }}">
+                delete
+            </button>
+        </td>
+    </tr>
+{% endfor %}
+
